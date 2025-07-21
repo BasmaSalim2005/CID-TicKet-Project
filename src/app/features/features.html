@@ -1,0 +1,56 @@
+<h1>Features</h1>
+
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (applicationNav)="navigateToApplication()"
+  (featureNav)="navigateToFeature()"
+  (ticketNav)="navigateToTicket()"
+  (feedbackNav)="navigateToFeedback()"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+  <div class="features-header">
+    <mat-form-field appearance="outline" *ngIf="appNames.length > 0">
+      <mat-label>Select Application</mat-label>
+      <mat-select (selectionChange)="onAppSelected($event.value)">
+        <mat-option *ngFor="let name of appNames" [value]="name">{{ name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="addfeat" (click)="openAddAppDialog(appName)">Add</button>
+  </div>
+
+  <h2 *ngIf="appName">{{ appName }}</h2>
+  <table *ngIf="appName && features && features.length > 0" class="features-table mat-elevation-z2">
+    <thead>
+      <tr>
+        <th>Feature Name</th>
+        <th>Developer</th>
+        <th>Description</th>
+        <th>Creation Date</th>
+        <th>Update Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feature of features">
+        <td>{{ capitalizeText(feature.name) }}</td>
+        <td>{{ formatDev(feature.devFname, feature.devLname) }}</td>
+        <td>{{ capitalizeText(feature.description) }}</td>
+        <td>{{ feature.createdAt | date:'medium' }}</td>
+        <td>{{ feature.updatedAt | date:'medium' }}</td>
+        <td>
+          <button mat-icon-button class="edit-btn" color="primary" (click)="editFeature(feature.id, feature)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="delete-btn" color="warn" (click)="deleteFeature(feature.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="appName && features && features.length === 0">
+    No features found.
+  </div>
+</div>

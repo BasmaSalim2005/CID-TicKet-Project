@@ -1,0 +1,71 @@
+.rating-group {
+  margin-bottom: 20px;
+}
+
+.stars {
+  cursor: pointer;
+}
+
+.stars span {
+  font-size: 2rem;
+  color: lightgray;
+  margin-right: 5px;
+}
+
+.stars span.filled {
+  color: gold;
+}
+
+.comment-group textarea {
+  width: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
+ form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  width: 300px;
+
+}
+
+.myformcontainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+label{
+  font-size: 12px;
+}
+
+input {
+  padding: 8px;
+  font-size: 14px;
+  width: 60%;
+  margin-left: 10px;
+}
+
+.inputcontainer{
+  display: flesx;
+
+}
+
+button {
+  padding: 10px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+h3{
+  color: #3f51b5;
+  text-align: center;
+}

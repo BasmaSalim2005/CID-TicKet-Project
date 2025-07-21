@@ -1,0 +1,19 @@
+
+<div class="dialog-title-row">
+  <h2 mat-dialog-title>Submit Solution</h2>
+  <button mat-icon-button class="close-btn" (click)="close()" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form [formGroup]="solutionForm" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" style="width:100%">
+      <mat-label>Solution</mat-label>
+      <textarea matInput formControlName="solution" rows="4" placeholder="Enter your solution..."></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="solutionForm.invalid">Submit</button>
+  </mat-dialog-actions>
+</form>

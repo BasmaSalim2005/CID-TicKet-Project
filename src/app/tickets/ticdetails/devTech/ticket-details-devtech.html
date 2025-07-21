@@ -1,0 +1,25 @@
+<mat-card *ngIf="ticket">
+  <h2>{{ ticket.title }}</h2>
+  <p><strong>Description:</strong> {{ ticket.description }}</p>
+  <p><strong>Location:</strong>{{ticket.location}}</p>
+  <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+  <p><strong>Status:</strong> {{ ticket.status }}</p>
+  <p><strong>Created By:</strong> {{ ticket.createdBy }}</p>
+  <div *ngIf="!ticket.solution && !solutionSubmitted">
+    <form [formGroup]="solutionForm" (ngSubmit)="submitSolution()">
+      <mat-form-field>
+        <textarea matInput placeholder="Enter solution" formControlName="solution"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="solutionForm.invalid">Submit Solution</button>
+    </form>
+  </div>
+  <div *ngIf="ticket.solution || solutionSubmitted">
+    <p><strong>Solution:</strong> {{ ticket.solution }}</p>
+    <p><strong>SolvedAt:</strong>{{ticket.solvedAt}}</p>
+  </div>
+  <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+    <button mat-raised-button color="primary" *ngIf="ticket.status === 'APPROVED'" (click)="closeTicket(ticket)">
+      Close Ticket
+    </button>
+  </div>
+</mat-card>

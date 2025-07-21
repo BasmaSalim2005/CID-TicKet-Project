@@ -3,6 +3,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "baseUrl": "./",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

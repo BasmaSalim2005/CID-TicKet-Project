@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.main-content {
+  margin-top: 64px; /* Height of header */
+  margin-left: 240px; /* Width of sidebar when open */
+  transition: margin-left 0.3s;
+}
+
+.sidebar-collapsed .main-content,
+.main-content.sidebar-collapsed {
+  margin-left: 64px; /* Width of sidebar when collapsed */
+}
+
+/* Add a class to the body or root element when sidebar is collapsed */
+body.sidebar-collapsed .main-content {
+  margin-left: 64px;
+}
+
+/* Optional: style for header and sidebar to ensure they are fixed */
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+app-sidebar {
+  position: fixed;
+  top: 64px; /* Below header */
+  left: 0;
+  height: calc(100% - 64px);
+  z-index: 999;
+}

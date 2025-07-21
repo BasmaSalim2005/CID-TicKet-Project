@@ -1,0 +1,105 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+}
+.KBIs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.app-card {
+  width: 320px;
+  min-height: 180px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+mat-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1976d2;
+}
+mat-card-content {
+  font-size: 1rem;
+  color: #333;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.kbi-card {
+  flex: 1;
+  min-width: 200px;
+  color: white;
+}
+.kbi-card.total {
+  background-color: #486cee;
+}
+.kbi-card.active {
+  background-color: #4CAF50;
+}
+.kbi-card.disactive {
+  background-color: #F44336;
+}
+.kbi-card.maintenance {
+  background-color: #FF9800;
+}
+.kbi-card mat-card-title,
+.kbi-card mat-card-content {
+  color: white;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+mat-form-field {
+  min-width: 260px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+button[mat-raised-button], .addfeat {
+  background: linear-gradient(90deg, #486cee 0%, #60a3f5 100%);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(72,108,238,0.10);
+  padding: 10px 24px;
+  margin-bottom: 12px;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+button[mat-raised-button]:hover, .addfeat:hover {
+  background: linear-gradient(90deg, #708de9 0%, #3f5bc4 100%);
+  box-shadow: 0 4px 16px rgba(72,108,238,0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.pagination-controls button {
+  min-width: 100px;
+  font-size: 1rem;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #e0e7ef;
+  margin: 24px 0;
+}

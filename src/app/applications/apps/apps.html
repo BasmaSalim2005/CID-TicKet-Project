@@ -1,0 +1,138 @@
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (applicationNav)="navigateToApplication()"
+  (featureNav)="navigateToFeature()"
+  (ticketNav)="navigateToTicket()"
+  (feedbackNav)="navigateToFeedback()"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<h2>here should be header </h2>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+  <p>Your Applications</p>
+  <div class="search-container">
+  <mat-form-field appearance="outline">
+      <mat-label>Search apps by name</mat-label>
+        <input matInput placeholder="Enter name..." [(ngModel)]="searchTerm" />
+  </mat-form-field>
+  </div>
+
+  <!-- <button (click)="addApplications()">Add App</button> -->
+
+  <!-- <button mat-raised-button color="primary" (click)="openAddAppDialog()">Add App</button> -->
+  <!-- The form is now in the dialog -->
+  <hr />
+
+  <!-- <table>
+      <thead>
+          <tr>
+          <th>App Name</th>
+          <th>Description</th>
+          <th>GitLab</th>
+          <th>Taiga</th>here is smtg wrong 
+          <th>Logo</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let app of applications">
+              <td>{{app.name}}</td>
+              <td>{{app.description}}</td>
+              <td><a [href]="app.gitLabLink" target="_blank">GitLabLink</a></td>
+              <td><a [href]="app.taigaLink" target="_blank">TaigaLink</a></td>
+              <td><a [href]="app.logoLink" target="_blank">LogoLink</a></td>
+          </tr>
+      </tbody>
+
+  </table> -->
+  <div class="KBIs">
+    <mat-card class="kbi-card total" (click)="filterByState('ALL')">
+      <mat-card-header>
+        <mat-card-title>TOTAL</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalApps }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kbi-card active" (click)="filterByState('ACTIVE')">
+      <mat-card-header>
+        <mat-card-title>ACTIVE</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalActive }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kbi-card disactive" (click)="filterByState('DISACTIVE')">
+      <mat-card-header>
+        <mat-card-title>DISACTIVE</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalDisactive }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kbi-card maintenance" (click)="filterByState('INMAINTENANCE')">
+      <mat-card-header>
+        <mat-card-title>MAINTENANCE</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalMaintenance }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <hr />
+  <div class="pagination-controls">
+    <button mat-raised-button (click)="previousPage()" [disabled]="currentPage === 0">
+      ← Previous
+    </button>
+  
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+  
+    <button mat-raised-button (click)="nextPage()" [disabled]="currentPage + 1 >= totalPages">
+      Next →
+    </button>
+  </div>
+  <div class="cards">
+    <mat-card
+      *ngFor="let app of applications"
+      class="app-card"
+      [ngClass]="{
+        'state-active': app.state === 'ACTIVE',
+        'state-disactive': app.state === 'DISACTIVE',
+        'state-maintenance': app.state === 'INMAINTENANCE'
+      }"
+    >
+      <mat-card-header>
+        <mat-card-title class="tofeat" style="cursor:pointer; color:#1976d2; text-decoration:underline"
+          (click)="navigateToFeatureApp(app.name)">
+          {{ app.name }}
+        </mat-card-title>
+        <!-- State dropdown -->
+        <mat-form-field
+          appearance="outline"
+          style="margin-left:auto; width:120px; font-size:0.9em;"
+        >
+          <mat-select [value]="app.state" (selectionChange)="changeAppState(app, $event.value)">
+            <mat-option value="ACTIVE">Active</mat-option>
+            <mat-option value="DISACTIVE">Disactive</mat-option>
+            <mat-option value="INMAINTENANCE">Maintenance</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-header>
+
+      <img mat-card-image *ngIf="app.logoLink" [src]="app.logoLink" alt="App Logo" />
+
+      <mat-card-content>
+        <p>{{ app.description }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <a mat-button color="primary" [href]="app.gitLabLink" target="_blank">Gitlab </a>
+        <a mat-button color="accent" [href]="app.taigaLink" target="_blank">Taiga</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <!-- ...existing code... -->
+</div>

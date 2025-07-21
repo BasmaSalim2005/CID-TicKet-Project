@@ -1,0 +1,88 @@
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (applicationNav)="navigateToApplication()"
+  (featureNav)="navigateToFeature()"
+  (ticketNav)="navigateToTicket()"
+  (feedbackNav)="navigateToFeedback()"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+  <div *ngIf="ticket">
+    <h2>Ticket Details</h2>
+    <form [formGroup]="ticketForm">
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" [readonly]="!editMode" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Status</mat-label>
+        <input matInput [value]="ticket.status" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Creation Date</mat-label>
+        <input matInput [value]="ticket.creationDate | date:'medium'" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Assigned To</mat-label>
+        <input matInput [value]="ticket.assignedTo" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Priority</mat-label>
+        <input matInput [value]="ticket.priority" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Type</mat-label>
+        <input matInput [value]="ticket.type" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Location</mat-label>
+        <input matInput [value]="ticket.location" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" [readonly]="!editMode"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%" *ngIf="ticket.appName">
+        <mat-label>Application</mat-label>
+        <input matInput [value]="ticket.appName" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%" *ngIf="ticket.featureName">
+        <mat-label>Feature</mat-label>
+        <input matInput [value]="ticket.featureName" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:85%" *ngIf="ticket.solution">
+        <mat-label>Solution</mat-label>
+        <input matInput [value]="ticket.solution" readonly />
+      </mat-form-field>
+      <div style="display:flex; gap:8px; margin-top:16px;">
+        <!-- Cancel: only for new/assigned/inprogress and not solved -->
+        <button *ngIf="!editMode && !issolved && (ticket.status === 'NEW' || ticket.status === 'ASSIGNED' || ticket.status === 'INPROGRESS')" mat-icon-button color="warn" (click)="cancelTic()" matTooltip="Cancel">
+          <mat-icon>cancel</mat-icon>
+        </button>
+        <!-- Approve/Reject: only for solved and not approved -->
+        <button *ngIf="!editMode && issolved && !isapproved" mat-icon-button color="green" (click)="ApproveTic()" matTooltip="Approve">
+          <mat-icon>thumb_up</mat-icon>
+          Approve
+        </button>
+        <button *ngIf="!editMode && issolved && !isapproved" mat-icon-button color="warn" (click)="NotApproveTic()" matTooltip="Reject">
+          <mat-icon>thumb_down</mat-icon>
+          Reject
+        </button>
+        <!-- Edit: hidden for in-progress -->
+        <button *ngIf="!editMode && ticket.status !== 'INPROGRESS'" mat-icon-button color="accent" (click)="enableEdit()" matTooltip="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <!-- Close: only for solved and approved -->
+        <button *ngIf="!editMode && issolved && isapproved" mat-icon-button color="primary" (click)="closeTic()" matTooltip="Close">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button *ngIf="editMode" mat-raised-button color="primary" (click)="saveEdit()" [disabled]="ticketForm.invalid">Save</button>
+        <button *ngIf="editMode" mat-button type="button" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!ticket">
+    <p>Loading ticket...</p>
+  </div>
+</div>

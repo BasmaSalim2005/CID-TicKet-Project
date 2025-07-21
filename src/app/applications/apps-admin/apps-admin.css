@@ -1,0 +1,100 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+}
+.KBIs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.app-card {
+  width: 320px;
+  min-height: 180px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+
+/* Pastel borders for states */
+.app-card.state-active {
+  border-color: #b7eac7; /* pastel green */
+}
+.app-card.state-disactive {
+  border-color: #ffd6d6; /* pastel red */
+}
+.app-card.state-maintenance {
+  border-color: #ffe5b4; /* pastel orange */
+}
+
+mat-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1976d2;
+  
+
+}
+
+.tofeat {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1976d2;
+  text-decoration:underline; 
+  cursor:pointer;
+}
+
+mat-card-content {
+  font-size: 1rem;
+  color: #333;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.kbi-card {
+  flex: 1;
+  min-width: 200px;
+  color: white;
+}
+.kbi-card.total {
+  background-color: #486cee;
+}
+.kbi-card.active {
+  background-color: #4CAF50;
+}
+.kbi-card.disactive {
+  background-color: #F44336;
+}
+.kbi-card.maintenance {
+  background-color: #FF9800;
+}
+.kbi-card mat-card-title,
+.kbi-card mat-card-content {
+  color: white;
+}
+
+.kbi-card, .kbi-card * {
+  color: #fff !important;
+}
+
+
+mat-form-field.state-select {
+  min-width: 80px;
+  max-width: 100px;
+  width: 100px !important;
+  margin-left: 8px;
+}
+mat-form-field.state-select .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+mat-form-field.state-select .mat-select {
+  font-size: 0.85em;
+}

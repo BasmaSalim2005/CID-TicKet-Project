@@ -1,0 +1,16 @@
+.edit-dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 340px;
+  padding: 8px 0 0 0;
+}
+mat-form-field {
+  width: 100%;
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}

@@ -1,0 +1,69 @@
+<p>Tell Me What You Think!</p>
+<div class="myformcontainer">
+    <form [formGroup]="feedbackForm">
+        <div class="rating-group">
+        <label>Satisfaction:</label>
+        <div class="stars">
+          <span *ngFor="let star of [1,2,3,4,5]"
+                (click)="setRating('satisfaction', star)"
+                [class.filled]="star <= feedbackForm.get('satisfaction')?.value">
+            ★
+          </span>
+        </div>
+      </div>
+      <div class="rating-group">
+        <label>Usability:</label>
+        <div class="stars">
+          <span *ngFor="let star of [1,2,3,4,5]"
+                (click)="setRating('usability', star)"
+                [class.filled]="star <= feedbackForm.get('usability')?.value">
+            ★
+          </span>
+        </div>
+      </div>
+    
+      <div class="rating-group">
+        <label>Performance:</label>
+        <div class="stars">
+          <span *ngFor="let star of [1,2,3,4,5]"
+                (click)="setRating('performance', star)"
+                [class.filled]="star <= feedbackForm.get('performance')?.value">
+            ★
+          </span>
+        </div>
+      </div>
+    
+      <div class="rating-group">
+        <label>Design:</label>
+        <div class="stars">
+          <span *ngFor="let star of [1,2,3,4,5]"
+                (click)="setRating('design', star)"
+                [class.filled]="star <= feedbackForm.get('design')?.value">
+            ★
+          </span>
+        </div>
+      </div>
+    
+      <div class="rating-group">
+        <label>Reliability:</label>
+        <div class="stars">
+          <span *ngFor="let star of [1,2,3,4,5]"
+                (click)="setRating('reliability', star)"
+                [class.filled]="star <= feedbackForm.get('reliability')?.value">
+            ★
+          </span>
+        </div>
+      </div>
+    
+      <div class="comment-group">
+        <label for="comment">Your Comment *</label>
+        <textarea id="comment" formControlName="comment" rows="4"></textarea>
+        <div class="error" *ngIf="feedbackForm.get('comment')?.invalid && feedbackForm.get('comment')?.touched">
+          Comment is required.
+        </div>
+      </div>
+    
+      <button type="button" (click)="submit()">Submit Feedback</button>
+    </form>
+
+</div>

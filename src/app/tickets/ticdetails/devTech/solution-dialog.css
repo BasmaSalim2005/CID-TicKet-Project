@@ -1,0 +1,30 @@
+
+.dialog-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.close-btn {
+  color: #888;
+  margin-left: 8px;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #d32f2f;
+}
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 320px;
+  font-size: 16px;
+}
+h2[mat-dialog-title] {
+  margin-bottom: 12px;
+  color: #1976d2;
+  font-weight: 600;
+}
+mat-dialog-actions {
+  margin-top: 16px;
+}
