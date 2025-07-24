@@ -4,30 +4,36 @@ import { Observable } from 'rxjs';
 import { envirement } from '../../envirement';
 import { Addfeedback } from '../feedback/add-feedback/addfeedback';
 import { AddfeedbackRequest } from './model/add-request';
+import { isNonNullChain } from 'typescript';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApplicationService {
 
-  constructor(private http:HttpClient ) {}
-  getAllApplicationspage(page: number, size: number): Observable<any>{
-     return this.http.get<any>(`${envirement.applicationService}/apps?page=${page}&size=${size}`)
+export class ApplicationService {
+  getAssignedTickets(email: string): any {
+    return this.http.get<any>(`${envirement.ticketService}/assigned/${email}`);
   }
-  getAppbyuserpage(email:string, page: number, size: number): Observable<any>{
-     return this.http.get<any>(`${envirement.applicationService}/app/by-user?${email}page=${page}&size=${size}`)
+  constructor(private http: HttpClient) {}
+
+  // -------------------- APPLICATION SERVICE --------------------
+  getAllApplicationspage(page: number, size: number): Observable<any> {
+    return this.http.get<any>(`${envirement.applicationService}/apps?page=${page}&size=${size}`);
   }
-  getAllApplications(): Observable<any>{
-     return this.http.get<any>(`${envirement.applicationService}/all`)
+  getAppbyuserpage(email: string, page: number, size: number): Observable<any> {
+    return this.http.get<any>(`${envirement.applicationService}/app/by-user?${email}page=${page}&size=${size}`);
   }
-  getAppbyuser(email:string): Observable<any>{
-     return this.http.get<any>(`${envirement.applicationService}/byuser/${email}`)
+  getAllApplications(): Observable<any> {
+    return this.http.get<any>(`${envirement.applicationService}/all`);
   }
-  getAppByName(name:string): Observable<any>{
-    return this.http.get<any>(`${envirement.applicationService}/getbyname/${name}`)
+  getAppbyuser(email: string): Observable<any> {
+    return this.http.get<any>(`${envirement.applicationService}/byuser/${email}`);
   }
-  addApplications(applications:any): Observable<any>{
-    return this.http.post<any>(`${envirement.applicationService}/add`, applications)
+  getAppByName(name: string): Observable<any> {
+    return this.http.get<any>(`${envirement.applicationService}/getbyname/${name}`);
+  }
+  addApplications(applications: any): Observable<any> {
+    return this.http.post<any>(`${envirement.applicationService}/add`, applications);
   }
   totalAppsActive(): Observable<any> {
     return this.http.get(`${envirement.applicationService}/countactive`);
@@ -50,34 +56,21 @@ export class ApplicationService {
     const params = new HttpParams().set('email', email as string);
     return this.http.get(`${envirement.applicationService}/maintenance/byuser`, { params });
   }
-  totalApps() : Observable<any>{
-    return this.http.get(`${envirement.applicationService}/counttotal`)
+  totalApps(): Observable<any> {
+    return this.http.get(`${envirement.applicationService}/counttotal`);
   }
-  totalAppsUser(email:String) : Observable<any>{
-    return this.http.get(`${envirement.applicationService}/counttotalbydev/${email}`)
+  totalAppsUser(email: String): Observable<any> {
+    return this.http.get(`${envirement.applicationService}/counttotalbydev/${email}`);
   }
-  deleteApplication(id: number): Observable<any>{
-    return this.http.delete(`${envirement.applicationService}/delete/${id}`)
+  deleteApplication(id: number): Observable<any> {
+    return this.http.delete(`${envirement.applicationService}/delete/${id}`);
   }
   AuthentificateUser(email: string, password: string): Observable<any> {
-    const body = new HttpParams()
-      .set('email', email)
-      .set('password', password);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
-    return this.http.post<any>(
-      `${envirement.applicationService}/users/login`,
-      body.toString(),
-      { headers }
-    );
+    const body = new HttpParams().set('email', email).set('password', password);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<any>(`${envirement.UserService}/login`, body.toString(), { headers });
   }
-  addFeature(feature: any): Observable<any>{
-    return this.http.post<any>(`${envirement.featureService}/add`, feature)
-  }
-  setApplicationActive(appName: String): Observable<any>  {
+  setApplicationActive(appName: String): Observable<any> {
     return this.http.put<any>(`${envirement.applicationService}/activate/${appName}`, null);
   }
   setApplicationDisactive(appName: String): Observable<any> {
@@ -86,18 +79,8 @@ export class ApplicationService {
   setApplicationMaintenance(appName: String): Observable<any> {
     return this.http.put<any>(`${envirement.applicationService}/inmaintenance/${appName}`, null);
   }
-  getFeaturesByAppName(appName: String): Observable<any> {
-    const params = new HttpParams().set('appName', appName as string);
-    return this.http.get<any>(`${envirement.featureService}/getbyapp/`, { params });
-  }
   editApplication(id: number, updatedFields: any): Observable<any> {
     return this.http.put<any>(`${envirement.applicationService}/update/${id}`, updatedFields);
-  }
-  deleteFeature(featureId: number): Observable<any> {
-    return this.http.delete<any>(`${envirement.featureService}/delete/${featureId}`);
-  }
-  editFeature(featureId: number, updatedFields: any): Observable<any> {
-    return this.http.put<any>(`${envirement.featureService}/update/${featureId}`, updatedFields);
   }
   getAllDevelopers(): Observable<any> {
     return this.http.get<any>(`${envirement.applicationService}/users/getdev`);
@@ -105,11 +88,31 @@ export class ApplicationService {
   addUserToApp(email: string, appName: string): Observable<any> {
     return this.http.post<any>(`${envirement.applicationService}/user/add?email=${email}&name=${appName}`, {});
   }
+
+  // -------------------- FEATURE SERVICE --------------------
+  addFeature(feature: any): Observable<any> {
+    return this.http.post<any>(`${envirement.featureService}/add`, feature);
+  }
+  getFeaturesByAppName(appName: String): Observable<any> {
+    const params = new HttpParams().set('appName', appName as string);
+    return this.http.get<any>(`${envirement.featureService}/getbyapp/`, { params });
+  }
+  deleteFeature(featureId: number): Observable<any> {
+    return this.http.delete<any>(`${envirement.featureService}/delete/${featureId}`);
+  }
+  editFeature(featureId: number, updatedFields: any): Observable<any> {
+    return this.http.put<any>(`${envirement.featureService}/update/${featureId}`, updatedFields);
+  }
+
+  // -------------------- TICKET SERVICE --------------------
   getTicketsByUser(email: string): Observable<any> {
     return this.http.get<any>(`${envirement.ticketService}/getbyemail/${email}`);
   }
   getTicketById(id: number): Observable<any> {
     return this.http.get<any>(`${envirement.ticketService}/getbyid/${id}`);
+  }
+  getAllTickets(): Observable<any> {
+    return this.http.get<any>(`${envirement.ticketService}/getall`);
   }
   addTicket(ticket: any): Observable<any> {
     return this.http.post<any>(`${envirement.ticketService}/add`, ticket);
@@ -122,35 +125,64 @@ export class ApplicationService {
   }
   countApproved(email: string): Observable<any> {
     const params = new HttpParams().set('email', email as string);
-    return this.http.get<any>(`${envirement.ticketService}/count/approve`, {params});
+    return this.http.get<any>(`${envirement.ticketService}/count/approve`, { params });
   }
   countSolved(email: string): Observable<any> {
     const params = new HttpParams().set('email', email as string);
-    return this.http.get<any>(`${envirement.ticketService}/count/solve`, {params});
+    return this.http.get<any>(`${envirement.ticketService}/count/solve`, { params });
   }
   countInprogress(email: string): Observable<any> {
     const params = new HttpParams().set('email', email as string);
-    return this.http.get<any>(`${envirement.ticketService}/count/inprogress`, {params});
+    return this.http.get<any>(`${envirement.ticketService}/count/inprogress`, { params });
   }
   countAssigned(email: string): Observable<any> {
     const params = new HttpParams().set('email', email as string);
-    return this.http.get<any>(`${envirement.ticketService}/count/assigne`, {params});
+    return this.http.get<any>(`${envirement.ticketService}/count/assigne`, { params });
   }
   countClosed(email: string): Observable<any> {
     const params = new HttpParams().set('email', email as string);
-    return this.http.get<any>(`${envirement.ticketService}/count/close`, {params});
+    return this.http.get<any>(`${envirement.ticketService}/count/close`, { params });
   }
   countCancelled(email: string): Observable<any> {
-    const params = new HttpParams().set('email', email as string);   
-    return this.http.get<any>(`${envirement.ticketService}/count/cancel`, {params});
+    const params = new HttpParams().set('email', email as string);
+    return this.http.get<any>(`${envirement.ticketService}/count/cancel`, { params });
   }
   closeTicket(id: number): Observable<any> {
-    return this.http.get<any>(`${envirement.ticketService}/close/${id}`);
+    return this.http.put<any>(`${envirement.ticketService}/close/${id}`, null);
   }
   approveTicket(id: number): Observable<any> {
-    return this.http.get<any>(`${envirement.ticketService}/approve/${id}`);
+    return this.http.put<any>(`${envirement.ticketService}/approve/${id}`, null);
   }
-  addFeedback(request:AddfeedbackRequest): Observable<any> {
+  cancelTicket(id: number): Observable<any> {
+    return this.http.put<any>(`${envirement.ticketService}/cancel/${id}`, null);
+  }
+  solveTicket(id: number, sol: string): Observable<any> {
+    // const params = new HttpParams().set('sol', sol as string);
+    // console.log(params)
+    return this.http.put<any>(`${envirement.ticketService}/solve/${id}/${sol}`, null);
+  }
+  notapproveTicket(id: number): Observable<any> {
+    return this.http.put<any>(`${envirement.ticketService}/notapprove/${id}`, null);
+  }
+  getAssignedTicket(email: string): Observable<any> {
+    return this.http.get<any>(`${envirement.ticketService}/assignedto/${email}`);
+  }
+  getStatusDetails(id: number): Observable<any> {
+    return this.http.get<any>(`${envirement.ticketService}/status/detail/${id}`);
+  }
+  inProgressStatus(id: number): Observable<any> {
+    return this.http.put<any>(`${envirement.ticketService}/inprogress/${id}`, null);
+  }
+  getAssignedCountByDev(): Observable<any> {
+    return this.http.get<any>(`${envirement.ticketService}/assigned/count/all`);
+  }
+
+  // -------------------- FEEDBACK SERVICE --------------------
+  addFeedback(request: AddfeedbackRequest): Observable<any> {
     return this.http.post<any>(`${envirement.feedbackService}/add`, request);
+  }
+
+  getFeedbackByApp(appId: number): Observable<any> {
+    return this.http.get<any>(`${envirement.feedbackService}/byapp/${appId}`);
   }
 }

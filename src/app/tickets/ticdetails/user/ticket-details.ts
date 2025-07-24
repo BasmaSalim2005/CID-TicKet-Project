@@ -71,7 +71,7 @@ export class TicketDetails implements OnInit {
         if(this.ticket.solution){
           this.issolved =true;
         }
-        if(this.ticket.status ==='APRROVED'){
+        if(this.ticket.status ==='APPROVED'){
           this.isapproved = true;
         }
       });
@@ -151,6 +151,8 @@ export class TicketDetails implements OnInit {
   ApproveTic() {
     if (this.ticket.status ==='SOLVED') {
       this.applicationService.approveTicket(this.ticket.id).subscribe(() => {
+        this.ticket.status = 'APPROVED';
+        this.isapproved = true;
         this.editMode = false;
       });
     }
@@ -159,17 +161,18 @@ export class TicketDetails implements OnInit {
   NotApproveTic() {
     if (this.ticket.status ==='SOLVED') {
       this.applicationService.notapproveTicket(this.ticket.id).subscribe(() => {
+        this.ticket.status = 'NOTAPPROVED';
+        this.isapproved = false;
         this.editMode = false;
-        
       });
     }
   }
 
   cancelTic() {
-    if (this.ticket.status ==='ASSIGNED'|| this.ticket.status ==='INPROGRESS') {
+    if (this.ticket.status ==='ASSIGNED'|| this.ticket.status ==='IN_PROGRESS') {
       this.applicationService.cancelTicket(this.ticket.id).subscribe(() => {
         this.editMode = false;
-        
+        this.ticket.status = 'CANCELLED';
       });
     }
   }

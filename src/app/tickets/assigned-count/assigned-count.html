@@ -1,1 +1,24 @@
-<p>assigned-count works!</p>
+<app-header></app-header>
+<app-sidebar [sidebarCollapsed]="sidebarCollapsed" (toggleSidebar)="onToggleSidebar()"></app-sidebar>
+<div class="assigned-count-container" style="position:absolute; top:10vh ; width: 82%; padding-left: 15%;">
+  <h2>Assigned Ticket Count</h2>
+  <div *ngIf="loading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div class="card-list" *ngIf="!loading && !error">
+    <mat-card class="assigned-card" *ngFor="let dev of assignedCounts">
+      <div class="dev-card-content">
+        <div class="dev-name">{{ dev.name }}</div>
+        <div class="dev-email">{{ dev.email }}</div>
+        <div class="dev-count">
+          <span class="count-label">Total Tickets:</span>
+          <span class="count-value">{{ dev.count }}</span>
+        </div>
+        <div class="dev-inprogress">
+          <span class="count-label">In Progress:</span>
+          <span class="count-value">{{ dev.inprogress }}</span>
+        </div>
+      </div>
+    </mat-card>
+    <div *ngIf="assignedCounts.length === 0" class="no-data">No assignments found.</div>
+  </div>
+</div>

@@ -1,1 +1,35 @@
-<p>history works!</p>
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="top: 40px;">
+  <h2>Closed Tickets</h2>
+  <div class="modern-table-container">
+    <table class="modern-ticket-table" *ngIf="closedTickets && closedTickets.length; else noClosed">
+      <thead>
+        <tr>
+          <th class="primary-header">Title</th>
+          <th class="primary-header">Creation Date</th>
+          <th class="primary-header">Created By</th>
+          <th class="primary-header">Status</th>
+          <th class="primary-header">Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tic of closedTickets" class="modern-row">
+          <td>
+            <a (click)="goToTicketDetails(tic)" class="modern-link">{{ tic.title }}</a>
+          </td>
+          <td>{{ tic.creationDate | date:'medium' }}</td>
+          <td>{{ tic.createdBy || tic.assignedTo }}</td>
+          <td [ngClass]="'status-' + (tic.status ? tic.status.toLowerCase() : '')">{{ tic.status }}</td>
+          <td>{{ tic.categories }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noClosed>
+    <p style="color: red;">No closed tickets found.</p>
+  </ng-template>
+</div>

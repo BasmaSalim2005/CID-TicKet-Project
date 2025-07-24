@@ -1,0 +1,88 @@
+.assigned-count-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+h2 {
+  color: #1976d2;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+  .assigned-card {
+    min-width: 220px;
+    max-width: 320px;
+    flex: 1 1 220px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px 0 rgba(128, 90, 213, 0.13);
+    border: 2px solid #d1b3ff;
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #fff;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+.dev-name {
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: #333;
+}
+.dev-email {
+  font-size: 0.98rem;
+  color: #666;
+  font-weight: 400;
+}
+.dev-count {
+  margin-top: 12px;
+  width: 100%;
+  text-align: left;
+}
+.count-value {
+  display: block;
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: #7c3aed;
+  margin-top: 2px;
+}
+.loading, .error, .no-data {
+  text-align: center;
+  margin: 24px 0;
+  color: #888;
+  font-size: 1.1rem;
+}
+.dev-email {
+  font-size: 0.98rem;
+  color: #666;
+}
+.dev-count {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1976d2;
+  margin-top: 8px;
+}
+.count-label {
+  color: #888;
+  font-weight: 400;
+  margin-right: 6px;
+}
+.count-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1976d2;
+}
+.loading {
+  text-align: center;
+  color: #1976d2;
+  font-size: 1.2rem;
+  margin: 32px 0;
+}

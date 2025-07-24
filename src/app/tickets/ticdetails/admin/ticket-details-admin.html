@@ -3,53 +3,89 @@
   (toggleSidebar)="toggleSidebar()"
 ></app-sidebar>
 <app-header (toggleSidebar)="toggleSidebar()"></app-header>
-<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="top: 25px;">
-<mat-card *ngIf="ticket">
-  <h2>{{ ticket.title }}</h2>
-  <p><strong>Description:</strong> {{ ticket.description }}</p>
-  <p><strong>Location:</strong>{{ticket.location}}</p>
-  <p><strong>Priority:</strong> {{ ticket.priority }}</p>
-  <p><strong>Status:</strong> {{ ticket.status }}</p>
-  <p><strong>Created By:</strong> {{ ticket.createdBy }}</p>
-  <p><strong>Assigned To:</strong> {{ ticket.assignedTo }}</p>
-  <h3>State Change History</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>State</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngIf="ticketDetails.createdAt">
-        <td>CREATED</td>
-        <td>{{ ticketDetails.createdAt | date:'short' }}</td>
-      </tr>
-      <tr *ngIf="ticketDetails.assignedAt">
-        <td>ASSIGNED</td>
-        <td>{{ ticketDetails.assignedAt | date:'short' }}</td>
-      </tr>
-      <tr *ngIf="ticketDetails.inProgressAt">
-        <td>IN_PROGRESS</td>
-        <td>{{ ticketDetails.inProgressAt | date:'short' }}</td>
-      </tr>
-      <tr *ngIf="ticketDetails.solvedAt">
-        <td>SOLVED</td>
-        <td>{{ ticketDetails.solvedAt | date:'short' }}</td>
-      </tr>
-      <tr *ngIf="ticketDetails.approvedAt">
-        <td>APPROVED</td>
-        <td>{{ ticketDetails.approvedAt | date:'short' }}</td>
-      </tr>
-      <tr *ngIf="ticketDetails.closedAt">
-        <td>CLOSED</td>
-        <td>{{ ticketDetails.closedAt | date:'short' }}</td>
-      </tr>
-      <tr *ngIf="ticketDetails.cancelledAt">
-        <td>CANCELLED</td>
-        <td>{{ ticketDetails.cancelledAt | date:'short' }}</td>
-      </tr>
-    </tbody>
-  </table>
-</mat-card>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="margin-top: 80px;">
+<div class="ticket-details-container">
+  <div class="ticket-details-title">Ticket Details</div>
+  <mat-card *ngIf="ticket" class="ticket-details-card">
+    <form class="ticket-details-form">
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Title</mat-label>
+        <input matInput [value]="ticket.title" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Creation Date</mat-label>
+        <input matInput [value]="ticket.creationDate | date:'medium'" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Status</mat-label>
+        <input matInput [value]="ticket.status" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Priority</mat-label>
+        <input matInput [value]="ticket.priority || '--------'" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Location</mat-label>
+        <input matInput [value]="ticket.location || '--------'" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Description</mat-label>
+        <textarea matInput [value]="ticket.description" readonly></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%" *ngIf="ticket.solution">
+        <mat-label>Solution</mat-label>
+        <textarea matInput [value]="ticket.solution" readonly></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Created By</mat-label>
+        <input matInput [value]="ticket.createdBy" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Assigned To</mat-label>
+        <input matInput [value]="ticket.assignedTo" readonly />
+      </mat-form-field>
+    </form>
+    <div class="state-history-title">State Change History</div>
+    <div class="state-history-table-container">
+      <table class="state-history-table">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="ticketDetails.createdAt">
+            <td>CREATED</td>
+            <td>{{ ticketDetails.createdAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="ticketDetails.assignedAt">
+            <td>ASSIGNED</td>
+            <td>{{ ticketDetails.assignedAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="ticketDetails.inProgressAt">
+            <td>IN_PROGRESS</td>
+            <td>{{ ticketDetails.inProgressAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="ticketDetails.solvedAt">
+            <td>SOLVED</td>
+            <td>{{ ticketDetails.solvedAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="ticketDetails.approvedAt">
+            <td>APPROVED</td>
+            <td>{{ ticketDetails.approvedAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="ticketDetails.closedAt">
+            <td>CLOSED</td>
+            <td>{{ ticketDetails.closedAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="ticketDetails.cancelledAt">
+            <td>CANCELLED</td>
+            <td>{{ ticketDetails.cancelledAt | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card>
+</div>
 </div>

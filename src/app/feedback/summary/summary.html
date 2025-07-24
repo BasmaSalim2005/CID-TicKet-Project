@@ -1,1 +1,33 @@
-<p>summary works!</p>
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+  <h2>Feedback Summary for {{ appName }}</h2>
+  <table class="styled-ticket-table" *ngIf="feedbacks && feedbacks.length; else noFeedback">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Rated At</th>
+        <th>Overall Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbacks">
+        <td>{{ feedback.userEmail }}</td>
+        <td>{{ feedback.creationDate | date:'medium' }}</td>
+        <td>
+          <a style="cursor:pointer; color:#1976d2; text-decoration:underline" (click)="openRatingDialog(feedback)">
+            <ng-container *ngFor="let star of [].constructor(feedback.overall); let i = index">&#9733;</ng-container>
+            <ng-container *ngFor="let star of [].constructor(5 - feedback.overall); let i = index">&#9734;</ng-container>
+          </a>
+        </td>
+      </tr> 
+    </tbody>
+  </table>
+  <ng-template #noFeedback>
+    <p>No feedback available for this application.</p>
+  </ng-template>
+</div>

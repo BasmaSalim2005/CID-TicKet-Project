@@ -1,5 +1,4 @@
-
-/* KPI Cards Styling for Admintic (match tickets.css) */
+/* KPI Cards Styling for Assigned Tickets (match admintic.css) */
 .kpi-cards {
   display: flex;
   flex-wrap: wrap;
@@ -64,7 +63,7 @@
 .kpi-card.cancelled { background: #d32f2f; color: #fff; }
 .kpi-card.approved .mat-card-title, .kpi-card.approved p { color: #222; }
 
-/* Table Styling for Admintic (match tickets.css) */
+/* Table Styling for Assigned Tickets (match admintic.css) */
 .tickets-table {
   width: 100%;
   border-collapse: separate;

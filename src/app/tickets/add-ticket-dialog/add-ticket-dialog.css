@@ -1,6 +1,144 @@
+body, :host {
+  background: #fafaff;
+}
+
+.dialog-container, form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 340px;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 rgba(72,108,238,0.10);
+  padding: 32px 28px 28px 28px;
+}
+
 .mat-form-field {
   width: 100%;
+  margin-bottom: 18px;
 }
+
 h2[mat-dialog-title] {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #4e73f8;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.mat-label, .mat-form-field-label {
+  color: #4e73f8 !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+textarea[matInput], input[matInput] {
+  min-height: 38px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: #f8f9ff;
+}
+
+.mat-select {
+  background: #f8f9ff;
+  border-radius: 8px;
+  min-height: 38px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mat-select-panel {
+  max-height: 220px;
+}
+
+button[mat-button], button[mat-raised-button] {
+  min-width: 90px;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+button[mat-raised-button] {
+  background: #4e73f8;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(72,108,238,0.10);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+button[mat-raised-button]:hover {
+  background: #3f5bc4;
+  box-shadow: 0 4px 16px rgba(72,108,238,0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+
+form > .mat-form-field-wrapper {
+  margin-bottom: 12px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #4e73f8;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #4e73f8;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 8px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px 0 10px 0;
+}
+
+.mat-select-arrow {
+  color: #4e73f8;
+}
+
+.mat-option {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: #e3eafd;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  border-color: #4e73f8;
+}
+
+textarea[matInput], input[matInput] {
+  background: #f8f9ff;
+  border-radius: 8px;
+  min-height: 38px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+}
+
+.mat-form-field {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 500px) {
+  .dialog-container, form {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 16px 4vw;
+  }
+  h2[mat-dialog-title] {
+    font-size: 1.3rem;
+  }
 }

@@ -56,7 +56,6 @@ export class TicketDetailsAdmin implements OnInit {
       });
     }
   }
-  
  toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }

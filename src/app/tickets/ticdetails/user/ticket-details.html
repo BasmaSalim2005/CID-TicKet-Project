@@ -56,21 +56,24 @@
         <input matInput [value]="ticket.solution" readonly />
       </mat-form-field>
       <div style="display:flex; gap:8px; margin-top:16px;">
-        <button *ngIf="!editMode && !issolved" mat-icon-button color="primary" (click)="cancelTic()" matTooltip="Cancel">
-          <!-- <mat-icon>Cancel</mat-icon> -->
-        </button>
-        <button *ngIf="!editMode && issolved" mat-icon-button color="primary" (click)="ApproveTic()" matTooltip="Approve">
+        <!-- Cancel: only for assigned/inprogress and not solved -->
+        <button *ngIf="!editMode && !issolved && (ticket.status === 'ASSIGNED' || ticket.status === 'IN_PROGRESS')" mat-raised-button color="warn" style="background-color:#d32f2f; color:#fff;" (click)="cancelTic()">Annuler</button>
+        <!-- Approve/Reject: only for solved and not approved -->
+        <button *ngIf="!editMode && issolved && !isapproved" mat-raised-button color="primary" style="background-color:#43a047; color:white;" (click)="ApproveTic()" matTooltip="Approve">
           <mat-icon>thumb_up</mat-icon>
+          Approve
         </button>
-        <button *ngIf="!editMode && issolved" mat-icon-button color="primary" (click)="NotApproveTic()" matTooltip="Reject">
+        <button *ngIf="!editMode && issolved && !isapproved" mat-raised-button color="warn" style="background-color:#e53935; color:white;" (click)="NotApproveTic()" matTooltip="Reject">
           <mat-icon>thumb_down</mat-icon>
+          Reject
         </button>
-        <button *ngIf="!editMode" mat-icon-button color="primary" (click)="enableEdit()" matTooltip="Edit">
+        <!-- Edit: hidden for solved and after -->
+        <button *ngIf="!editMode && ticket.status !== 'APPROVED' && ticket.status !== 'SOLVED' && ticket.status !== 'NOTAPPROVED' && ticket.status !== 'CLOSED' && ticket.status !== 'CANCELLED'" mat-icon-button color="accent" (click)="enableEdit()" matTooltip="Edit">
           <mat-icon>edit</mat-icon>
         </button>
+        <!-- Close: only for solved and approved -->
         <button *ngIf="!editMode && issolved && isapproved" mat-icon-button color="primary" (click)="closeTic()" matTooltip="Close">
-          <!-- <mat-icon>Close</mat-icon> -->
-           <span>close </span>
+          <mat-icon>close</mat-icon>
         </button>
         <button *ngIf="editMode" mat-raised-button color="primary" (click)="saveEdit()" [disabled]="ticketForm.invalid">Save</button>
         <button *ngIf="editMode" mat-button type="button" (click)="cancelEdit()">Cancel</button>

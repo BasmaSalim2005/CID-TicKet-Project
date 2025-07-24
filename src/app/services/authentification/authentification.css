@@ -57,8 +57,33 @@
   border-radius: 6px;
   font-size: 1rem;
 }
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.form-row label {
+  min-width: 120px;
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+  margin-right: 12px;
+}
+.form-row input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.required-star {
+  color: #e53935;
+  font-size: 1.1em;
+  margin-left: 2px;
+}
 .login-form button {
-  margin-top: 8px;
+  margin-top: 18px;
+  width: 100%;
   padding: 12px 0;
   background: linear-gradient(90deg, #486cee 0%, #60a3f5 100%);
   color: #fff;
@@ -75,4 +100,11 @@
   background: linear-gradient(90deg, #708de9 0%, #3f5bc4 100%);
   box-shadow: 0 4px 16px rgba(72,108,238,0.18);
   transform: translateY(-2px) scale(1.03);
+}
+.forgot-link {
+  color: #1976d2;
+  text-decoration: underline;
+  font-size: 0.98rem;
+  margin-left: 2px;
+  cursor: pointer;
 }

@@ -3,15 +3,28 @@
     <button class="menu-btn" (click)="toggleSidebar.emit()">
       <mat-icon>menu</mat-icon>
     </button>
-    <!-- Admin Links -->
+    
+    <!-- ADMIN -->
     <ng-container *ngIf="role === 'ADMIN'">
-      <a class="nav-link" (click)="navigateToTicket()">
+      <a class="nav-link" (click)="navigateToAllTickets()">
         <mat-icon>list_alt</mat-icon>
         <span>All Tickets</span>
       </a>
-      <a class="nav-link" (click)="navigateToFeedback()">
+      <a class="nav-link" (click)="navigateToMyTickets()">
+        <mat-icon>confirmation_number</mat-icon>
+        <span>My Tickets</span>
+      </a>
+      <a class="nav-link" (click)="navigateToHistory()">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </a>
+      <a class="nav-link" (click)="navigateToAllFeedback()">
         <mat-icon>feedback</mat-icon>
         <span>All Feedback</span>
+      </a>
+      <a class="nav-link" (click)="navigateToFeedbackPage()">
+        <mat-icon>add_reaction</mat-icon>
+        <span>Feedback</span>
       </a>
       <a class="nav-link" (click)="navigateToApplication()">
         <mat-icon>apps</mat-icon>
@@ -21,14 +34,15 @@
         <mat-icon>star</mat-icon>
         <span>Features</span>
       </a>
-      <a class="nav-link" (click)="navigateToHistory()">
-        <mat-icon>history</mat-icon>
-        <span>History</span>
+      <a class="nav-link" (click)="navigateToAssignedCount()">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Workload</span>
       </a>
+      
     </ng-container>
 
-    <!-- Dev and Tech Links -->
-    <ng-container *ngIf="role === 'DEV' || role === 'TECH'">
+    <!-- DEVELOPER -->
+    <ng-container *ngIf="role === 'DEVELOPER'">
       <a class="nav-link" (click)="navigateToApplication()">
         <mat-icon>apps</mat-icon>
         <span>Applications</span>
@@ -41,38 +55,61 @@
         <mat-icon>assignment_ind</mat-icon>
         <span>Assigned</span>
       </a>
-      <a class="nav-link" (click)="navigateToFeedback()">
-        <mat-icon>add_reaction</mat-icon>
-        <span>Feedback</span>
-      </a>
-      <a class="nav-link" (click)="navigateToHistory()">
-        <mat-icon>history</mat-icon>
-        <span>History</span>
-      </a>
-    </ng-container>
-
-    <!-- User Links -->
-    <ng-container *ngIf="role === 'USER'">
-      <a class="nav-link" (click)="navigateToApplication()">
-        <mat-icon>apps</mat-icon>
-        <span>Applications</span>
-      </a>
-      <a class="nav-link" (click)="navigateToFeature()">
-        <mat-icon>star</mat-icon>
-        <span>Features</span>
-      </a>
-      <a class="nav-link" (click)="navigateToTicket()">
+      <a class="nav-link" (click)="navigateToMyTickets()">
         <mat-icon>confirmation_number</mat-icon>
         <span>My Tickets</span>
       </a>
-      <a class="nav-link" (click)="navigateToFeedback()">
+      <a class="nav-link" (click)="navigateToHistory()">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </a>
+      <a class="nav-link" (click)="navigateToFeedbackPage()">
         <mat-icon>add_reaction</mat-icon>
         <span>Feedback</span>
+      </a>
+    </ng-container>
+
+    <!-- TECHNICIAN -->
+    <ng-container *ngIf="role === 'TECHNICIAN'">
+      <a class="nav-link" (click)="navigateToAssigned()">
+        <mat-icon>assignment_ind</mat-icon>
+        <span>Assigned</span>
+      </a>
+      <a class="nav-link" (click)="navigateToMyTickets()">
+        <mat-icon>confirmation_number</mat-icon>
+        <span>My Tickets</span>
       </a>
       <a class="nav-link" (click)="navigateToHistory()">
         <mat-icon>history</mat-icon>
         <span>History</span>
       </a>
+      <a class="nav-link" (click)="navigateToFeedbackPage()">
+        <mat-icon>add_reaction</mat-icon>
+        <span>Feedback</span>
+      </a>
     </ng-container>
+
+    <!-- USER -->
+    <ng-container *ngIf="role === 'USER'">
+      <a class="nav-link" (click)="navigateToMyTickets()">
+        <mat-icon>confirmation_number</mat-icon>
+        <span>My Tickets</span>
+      </a>
+      <a class="nav-link" (click)="navigateToHistory()">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </a>
+      <a class="nav-link" (click)="navigateToFeedbackPage()">
+        <mat-icon>add_reaction</mat-icon>
+        <span>Feedback</span>
+      </a>
+    </ng-container>
+    
+    <!-- TUTORIAL TAB FOR ALL ROLES -->
+      <a class="nav-link" (click)="navigateToTutorial()">
+        <mat-icon>school</mat-icon>
+        <span>Tutoriel</span>
+      </a>
+      <p style="top: 85%;">Copyright&#64;CID </p>
   </nav>
 </div>

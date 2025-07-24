@@ -1,1 +1,99 @@
-<p>admintic works!</p>
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<!-- this isfeature hhhhhhhhhhhhhhhhhhhhh -->
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="main-content" style="display: flex; width: 80%;">
+  <app-sidebar></app-sidebar>
+  <div>
+    <h2>All Tickets</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <mat-card class="kpi-card total" (click)="filterByState('ALL')">
+      <mat-card-header>
+        <mat-card-title>TOTAL</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalTickets }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="kpi-card assigned" (click)="filterByState('ASSIGNED')">
+      <mat-card-header>
+        <mat-card-title>ASSIGNED</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalAssigned }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="kpi-card inprogress" (click)="filterByState('IN_PROGRESS')">
+      <mat-card-header>
+        <mat-card-title>IN PROGRESS</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalInProgress }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="kpi-card solved" (click)="filterByState('SOLVED')">
+      <mat-card-header>
+        <mat-card-title>SOLVED</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalSolved }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="kpi-card approved" (click)="filterByState('APPROVED')">
+      <mat-card-header>
+        <mat-card-title>APPROVED</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalApproved }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="kpi-card closed" (click)="filterByState('CLOSED')" >
+      <mat-card-header>
+        <mat-card-title>CLOSED</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalClosed }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="kpi-card cancelled" (click)="filterByState('CANCELLED')">
+      <mat-card-header>
+        <mat-card-title>CANCELLED</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalCancelled }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    </div>
+    <table *ngIf="filteredTickets && filteredTickets.length > 0" class="tickets-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Creation Date</th>
+          <th>Created By</th>
+          <th>Assigned To</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of filteredTickets">
+          <td>
+            <a (click)="getAdminTicketLink(ticket.id)" style="cursor:pointer; color:#1976d2; text-decoration:underline">
+              {{ capitalizeText(ticket.title) }}
+            </a>
+          </td>
+          <td>{{ ticket.creationDate | date:'medium' }}</td>
+          <td>{{ ticket.createdByLastName ? (ticket.createdByLastName.toUpperCase() + ' ' + capitalizeText(ticket.createdByFirstName)) : capitalizeText(ticket.createdBy) }}</td>
+          <td>{{ ticket.assignedTo }}</td>
+          <td [ngClass]="'priority-' + (ticket.priority?.toLowerCase() || '')">{{ capitalizeText(ticket.priority) }}</td>
+          <td [ngClass]="'status-' + (ticket.status?.toLowerCase() || '')">{{ capitalizeText(ticket.status) }}</td>
+          <td>{{ formatCategory(ticket.categories) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from '../components/header';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SidebarComponent } from '../components/sidebar';
+import { SidebarComponent } from '../components/sidebar/sidebar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 // import { EditticketDialog } from '../tickets/add-ticket-dialog/add-ticket-dialog';
@@ -77,7 +77,17 @@ export class Tickets {
     });
   }
 
-  
+   formatCategory(category: string | string[]): string {
+    if (!category) return '';
+    const map: { [key: string]: string } = {
+      'APP_RELATED': 'Application',
+      'HELPDESK': 'Help-desk'
+    };
+    if (Array.isArray(category)) {
+      return category.map(cat => map[cat] || cat).join(', ');
+    }
+    return map[category] || category;
+  }
 
   openAddTicketDialog() {
     const dialogRef = this.dialog.open(AddTicketDialog, {
