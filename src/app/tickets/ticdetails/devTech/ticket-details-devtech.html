@@ -1,3 +1,8 @@
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
 <mat-card *ngIf="ticket">
   <h2>{{ ticket.title }}</h2>
   <p><strong>Description:</strong> {{ ticket.description }}</p>
