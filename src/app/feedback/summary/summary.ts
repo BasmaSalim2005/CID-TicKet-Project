@@ -34,10 +34,10 @@ export class Summary implements OnInit {
         this.appName = queryParams.get('name') || '';
         console.log('Summary page appId:', this.appId, 'appName:', this.appName);
         if (this.appId) {
-          this.applicationService.getFeedbackByApp(this.appId).subscribe((feedbacks: any[]) => {
-            console.log('Feedbacks received for appId', this.appId, ':', feedbacks);
-            this.feedbacks = feedbacks;
-          }, err => {
+          this.applicationService.getFeedbackByApp(this.appId).subscribe((data) => {
+            console.log('Feedbacks received for appId', this.appId, ':', data);
+            this.feedbacks = data;
+          }, (err) => {
             console.error('Error fetching feedbacks for appId', this.appId, err);
           });
         }

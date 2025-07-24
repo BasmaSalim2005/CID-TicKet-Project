@@ -1,3 +1,16 @@
+/* Yellow stars for overall rating */
+.stars mat-icon {
+  color: #FFD600 !important;
+  font-size: 22px;
+  vertical-align: middle;
+  filter: drop-shadow(0 1px 1px #fff8e1);
+  /* border: #222; */
+}
+
+/* .border{
+  color: black;
+} */
+
 .feedback-table {
   width: 100%;
   border-collapse: separate;

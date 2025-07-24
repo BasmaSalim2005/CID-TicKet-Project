@@ -3,7 +3,7 @@
   (toggleSidebar)="toggleSidebar()"
 ></app-sidebar>
 <app-header (toggleSidebar)="toggleSidebar()"></app-header>
-<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="top: 40px;">
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="position: absolute; top: 7%">
   <h2>Closed Tickets</h2>
   <div class="modern-table-container">
     <table class="modern-ticket-table" *ngIf="closedTickets && closedTickets.length; else noClosed">

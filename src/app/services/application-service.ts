@@ -11,9 +11,7 @@ import { isNonNullChain } from 'typescript';
 })
 
 export class ApplicationService {
-  getAssignedTickets(email: string): any {
-    return this.http.get<any>(`${envirement.ticketService}/assigned/${email}`);
-  }
+  
   constructor(private http: HttpClient) {}
 
   // -------------------- APPLICATION SERVICE --------------------
@@ -164,7 +162,7 @@ export class ApplicationService {
   notapproveTicket(id: number): Observable<any> {
     return this.http.put<any>(`${envirement.ticketService}/notapprove/${id}`, null);
   }
-  getAssignedTicket(email: string): Observable<any> {
+  getAssignedTickets(email: string): Observable<any> {
     return this.http.get<any>(`${envirement.ticketService}/assignedto/${email}`);
   }
   getStatusDetails(id: number): Observable<any> {

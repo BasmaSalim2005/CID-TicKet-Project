@@ -106,7 +106,7 @@ export class Tickets {
 
   onticketSelected(ticketId: number) {
     // For now, just open the edit dialog for the ticket
-    this.router.navigate(['/tickets/details/', ticketId]);
+    this.router.navigate(['tickets/ticdetails/user/:id', ticketId]);
     // const ticket = this.tickets.find(t => t.id === ticketId);
     // if (ticket) {
     //   // this.edit(ticketId, ticket);
@@ -142,7 +142,7 @@ export class Tickets {
     this.router.navigate(['/feedback/appfeedback']);
   }
   goToTicketDetails(ticketId: number) {
-    this.router.navigate(['/tickets/details', ticketId]);
+    this.router.navigate(['tickets/ticdetails/user/', ticketId]);
   }
 
 

@@ -42,9 +42,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: semibold;
+  font-weight: bold;
   margin-right: 12px;
-  font-size: 2em;
+  font-size: 30px;
   cursor: pointer;
 }
 .app-header .logo {
@@ -64,27 +64,42 @@
 }
 
 
-.mydropdown{
-  background-color: #60a3f5!important;
-  height: 500px;
+.mydropdown {
+  background-color: #c5e5fb !important;
+  min-width: 180px;
+  max-width: 260px;
+  max-height: 160px;
+  position: absolute;
+  top: 70px;
+  right: 24px;
+  z-index: 200;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 18px 18px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #222;
+  font-size: 1em;
+  overflow: auto;
 }
 
 
 .profile-menu-panel .profile-names,
 .profile-menu-panel .email,
 .profile-menu-panel .role {
-  color: #5caff3;
+  color: #1a2a3a;
 }
 
 .profile-menu-panel .profile-names {
-  font-size: 1.2em;
-  font-weight: 500;
+  font-size: 1.1em;
+  font-weight: 600;
   margin-bottom: 8px;
 }
 
 .profile-menu-panel .email,
 .profile-menu-panel .role {
-  font-size: 1em;
+  font-size: 0.98em;
   margin-bottom: 6px;
 }
 
@@ -100,11 +115,14 @@
 .fname, .lname {
   font-weight: 600;
   font-size: 1rem;
-  color: #60a3f5;;
+  color: #1a2a3a;
+}
+.lname{
+  text-transform: uppercase;
 }
 .email {
-  font-size: 0.9rem;
-  color: #60a3f5;;
+  font-size: 0.95rem;
+  color: #1a2a3a;
   margin-bottom: 2px;
 }
 .role {
@@ -132,16 +150,17 @@ mat-menu button:hover {
 
 .logout-btn {
   color: #fff !important;
-  background: #e53935 !important;
+  background: #72acea !important;
   border-radius: 8px !important;
   font-weight: bold;
   margin-top: 12px;
   width: 100%;
+  height: 40px;
   justify-content: center;
   transition: background 0.2s;
 }
 .logout-btn:hover, .logout-btn:focus {
-  background: #b71c1c !important;
+  background: #4c9ff2 !important;
 }
 
 /* Correct overlay styling for the menu panel

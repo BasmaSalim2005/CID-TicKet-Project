@@ -4,7 +4,7 @@
 ></app-sidebar>
 
 <app-header (toggleSidebar)="toggleSidebar()"></app-header>
-<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="position: absolute; top: 10%">
   <h2>Feedback Summary for {{ appName }}</h2>
   <table class="styled-ticket-table" *ngIf="feedbacks && feedbacks.length; else noFeedback">
     <thead>
@@ -23,6 +23,7 @@
             <ng-container *ngFor="let star of [].constructor(feedback.overall); let i = index">&#9733;</ng-container>
             <ng-container *ngFor="let star of [].constructor(5 - feedback.overall); let i = index">&#9734;</ng-container>
           </a>
+        <span class="rating-value">({{ feedback.overall | number:'1.1-2' }})</span>
         </td>
       </tr> 
     </tbody>

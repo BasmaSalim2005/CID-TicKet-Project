@@ -4,7 +4,7 @@
 ></app-sidebar>
 
 <app-header (toggleSidebar)="toggleSidebar()"></app-header>
-<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed" style="position: absolute; top: 7%">
   <h2>All Applications Feedback</h2>
   <table class="feedback-table" style="width:90%;margin:32px auto 0 auto;">
     <thead>
@@ -13,6 +13,7 @@
         <th>Application Name</th>
         <th>Created At</th>
         <th>Rating</th>
+        <th>Overall Rating</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,20 @@
         </td>
         <td>{{ app.creationDate | date:'mediumDate' }}</td>
         <td>{{ app.ratingCount }}</td>
+        <td>
+          <ng-container *ngIf="app.overallRating !== null; else noRating">
+            <span class="stars">
+              <ng-container *ngFor="let star of [1,2,3,4,5]">
+                <mat-icon *ngIf="app.overallRating >= star">star</mat-icon>
+                <mat-icon *ngIf="app.overallRating < star" >star_border</mat-icon>
+              </ng-container>
+            </span>
+            <span class="rating-value">({{ app.overallRating | number:'1.1-2' }})</span>
+          </ng-container>
+          <ng-template #noRating>
+            <span class="no-rating">No ratings</span>
+          </ng-template>
+        </td>
       </tr>
     </tbody>
   </table>

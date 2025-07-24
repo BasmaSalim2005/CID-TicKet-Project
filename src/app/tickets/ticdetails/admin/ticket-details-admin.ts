@@ -50,7 +50,7 @@ export class TicketDetailsAdmin implements OnInit {
       });
       this.applicationService.getStatusDetails(+id).subscribe({
         next: (data: TicketStatusDetailsDTO) => {
-          console.log(data);
+          console.log('data',data);
           this.ticketDetails = data;
         }
       });
@@ -59,4 +59,5 @@ export class TicketDetailsAdmin implements OnInit {
  toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
+  
 }

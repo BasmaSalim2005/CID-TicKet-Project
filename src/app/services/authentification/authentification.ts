@@ -46,7 +46,7 @@ export class Authentification {
         // }else if (data.role =='ADMIN'){
         //   this.router.navigate(['/applications/appsadmin']);
         // }
-        this.router.navigate(['tickets/tickets']);
+        this.router.navigate(['/tickets']);
       },
       error: (error: any) =>{
         console.error('error while loggin user!', error)
