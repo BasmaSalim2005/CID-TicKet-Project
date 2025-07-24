@@ -1,31 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { HeaderComponent } from 'src/app/components/header';
-import { SidebarComponent } from 'src/app/components/sidebar/sidebar';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-ratingdialogue',
-  standalone: true,
-  imports: [MatDialogRef, CommonModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    HeaderComponent,
-    SidebarComponent,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatIconModule],
+  standalone: false,
   templateUrl: './ratingdialogue.html',
   styleUrl: './ratingdialogue.css'
 })
 export class Ratingdialogue {
-  constructor(
-    public dialogRef: MatDialogRef<Ratingdialogue>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+
 }

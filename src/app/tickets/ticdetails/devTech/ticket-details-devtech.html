@@ -17,9 +17,4 @@
     <p><strong>Solution:</strong> {{ ticket.solution }}</p>
     <p><strong>SolvedAt:</strong>{{ticket.solvedAt}}</p>
   </div>
-  <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
-    <button mat-raised-button color="primary" *ngIf="ticket.status === 'APPROVED'" (click)="closeTicket(ticket)">
-      Close Ticket
-    </button>
-  </div>
 </mat-card>

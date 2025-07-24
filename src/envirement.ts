@@ -4,7 +4,7 @@ const backendUrl= 'http://localhost:8080/api/demo1' //api/demo1/applications
 export const envirement = {
     applicationService: `${backendUrl}/applications`,
     featureService: `${backendUrl}/features`,
-    feedbackService: `${backendUrl}/feedbacks`,
+    feedbackService: `${backendUrl}/feedback`,
     ticketService: `${backendUrl}/tickets`,
     UserService: `${backendUrl}/users`
 }

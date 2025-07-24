@@ -1,5 +1,5 @@
 <p>Give Your Feedback!</p>
-<app-sidebar
+  <app-sidebar
   [sidebarCollapsed]="sidebarCollapsed"
   (applicationNav)="navigateToApplication()"
   (featureNav)="navigateToFeature()"
@@ -9,45 +9,38 @@
 
 <app-header (toggleSidebar)="toggleSidebar()"></app-header>
 
-<div style="position: absolute; top: 12%; right: 0%; width: 81% !important;">
-  <table class="apps-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>State</th>
-        <th>Description</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let app of applications">
-        <td>{{ capitalizeText(app.name) }}</td>
-        <td>
-          <span [ngClass]="{
-            'state-active': app.state === 'ACTIVE',
-            'state-maintenance': app.state === 'INMAINTENANCE',
-            'state-disactive': app.state === 'DISACTIVE'
-          }">
-            {{ app.state }}
-          </span>
-        </td>
-        <td>{{ capitalizeText(app.description) }}</td>
-        <td>
-          <button mat-icon-button color="primary" (click)="openrateAppDialog(app)">
+  <div class="cards" style="position: absolute ; height:300px;top: 12%; right: 0%; width: 81% !important;display: flex; 
+  justify-content: center; align-items: center;">
+    <mat-card
+      *ngFor="let app of applications"
+      class="app-card"
+      style=" width: 200px; "
+    >
+      <mat-card-header>
+        <mat-card-title class="tofeat" style=" color:#1976d2; text-decoration:underline">
+          {{ app.name }}
+        </mat-card-title>
+
+        <span style="margin-left:8px; display:flex; align-items:center;">
+          <button mat-icon-button color="primary" (click)="openrateAppDialog(app)" >
             <mat-icon>add_reaction</mat-icon>
           </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </span>
+      </mat-card-header>
 
-  <div class="pagination-controls">
+      <img mat-card-image *ngIf="app.logoLink" [src]="app.logoLink" alt="App Logo" />
+
+      
+    </mat-card>
+
+    <div class="pagination-controls">
     <button mat-raised-button (click)="previousPage()" [disabled]="currentPage === 0">
       ← Previous
     </button>
+  
     <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+  
     <button mat-raised-button (click)="nextPage()" [disabled]="currentPage + 1 >= totalPages">
       Next →
     </button>
   </div>
-</div>

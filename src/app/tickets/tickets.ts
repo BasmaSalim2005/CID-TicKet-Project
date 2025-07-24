@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from '../components/header';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SidebarComponent } from '../components/sidebar/sidebar';
+import { SidebarComponent } from '../components/sidebar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 // import { EditticketDialog } from '../tickets/add-ticket-dialog/add-ticket-dialog';
@@ -67,9 +67,7 @@ export class Tickets {
   getTicketsByUser() {
     this.applicationService.getTicketsByUser(this.user.email).subscribe({
       next: (data: any[]) => {
-
-        console.log('User tickets:', data)
-        this.tickets = data.sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime());
+        this.tickets = data;
         this.getKPIs();
       },
       error: () => {
@@ -88,7 +86,6 @@ export class Tickets {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Dialog result:', result);
         this.applicationService.addTicket({ ...result, userEmail: this.user.email }).subscribe({
           next: () => this.getTicketsByUser(),
           error: err => console.error('Error adding ticket:', err)
@@ -106,17 +103,17 @@ export class Tickets {
     // }
   }
 
-  // getticketByuser(user: any) {
-  //   this.applicationService.getTicketsByUser(user.email).subscribe({
-  //     next: (data) => {
-  //       console.log('users tickets data:', data); // <-- Add this line
-  //       this.tickets = data;
-  //     },
-  //     error: (error: any) => {
-  //       this.tickets = [];
-  //     }
-  //   });
-  // }
+  getticketByuser(user: any) {
+    this.applicationService.getTicketsByUser(user.email).subscribe({
+      next: (data) => {
+        console.log('users tickets data:', data); // <-- Add this line
+        this.tickets = data;
+      },
+      error: (error: any) => {
+        this.tickets = [];
+      }
+    });
+  }
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
@@ -135,7 +132,7 @@ export class Tickets {
     this.router.navigate(['/feedback/appfeedback']);
   }
   goToTicketDetails(ticketId: number) {
-    this.router.navigate(['/tickets/ticdetails/user/', ticketId]);
+    this.router.navigate(['/tickets/details', ticketId]);
   }
 
 
@@ -145,10 +142,7 @@ export class Tickets {
     return this.tickets.filter(t => t.status === this.selectedStateFilter);
   }
 
-  getStatusClass(status: string): string {
-  return status ? 'status-' + status.toLowerCase() : '';
-}
-
+  
   getKPIs() {
     this.applicationService.countApproved(this.user.email).subscribe(data => {
       this.totalApproved = data;
@@ -156,108 +150,88 @@ export class Tickets {
     });
     this.applicationService.countSolved(this.user.email).subscribe(data => {
       this.totalSolved = data;
-      console.log('solved',data);
+      console.log('approved',data);
     });
     this.applicationService.countCancelled(this.user.email).subscribe(data => {
       this.totalCancelled = data;
-      console.log('cancelled',data);
+      console.log('approved',data);
     });
     this.applicationService.countInprogress(this.user.email).subscribe(data => {
       this.totalInProgress = data;
-      console.log('in progress',data);
+      console.log('approved',data);
     });
     this.applicationService.countAssigned(this.user.email).subscribe(data => {
       this.totalAssigned = data;
-      console.log('assigned',data);
+      console.log('approved',data);
     });
     this.applicationService.countClosed(this.user.email).subscribe(data => {
       this.totalClosed= data;
-      console.log('closed',data);
-      // Calculate total tickets after all KPI values are updated
-      setTimeout(() => {
-        this.totalTickets =
-          this.totalApproved +
-          this.totalSolved +
-          this.totalCancelled +
-          this.totalInProgress +
-          this.totalAssigned +
-          this.totalClosed;
-      }, 200);
+      console.log('approved',data);
     });
   }
-  
-
-  changeTicketStatus(ticket: any, newStatus: string) {
-    if (ticket.status === newStatus) {
-      console.warn('Ticket already has status:', newStatus);
+  deleteticket(ticketId: number) {
+    if (ticketId === undefined || ticketId === null) {
+      console.error('Cannot delete ticket: ticketId is undefined or null!');
+      alert('Error: ticket ID is missing. Cannot delete this ticket.');
       return;
     }
-
-    // Approve logic: only if solved
-    if (newStatus === 'APPROVED') {
-      if (ticket.status !== 'SOLVED') {
-        console.error('Ticket must be SOLVED before it can be APPROVED.');
-        return;
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      width: '350px',
+      data: {
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this ticket?'
       }
-      this.applicationService.approveTicket(ticket.id).subscribe({
-        next: () => {
-          ticket.status = 'APPROVED';
-          console.log(`Ticket ${ticket.id} approved.`);
-          this.getKPIs();
-        },
-        error: (err) => console.error('Error approving ticket:', err)
-      });
-
-    // Reject logic: only if solved
-    } else if (newStatus === 'REJECTED') {
-      if (ticket.status !== 'SOLVED') {
-        console.error('Ticket must be SOLVED before it can be REJECTED.');
-        return;
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.applicationService.deleteTicket(ticketId).subscribe({
+          next: () => this.getticketByuser(this.user.email),
+          error: err => console.error('Error deleting ticket:', err)
+        });
       }
-      this.applicationService.notapproveTicket(ticket.id).subscribe({
-        next: () => {
-          ticket.status = 'IN_PROGRESS'; // Show as in-progress in frontend
-          console.log(`Ticket ${ticket.id} rejected, set to in-progress.`);
-          this.getKPIs();
-        },
-        error: (err) => console.error('Error rejecting ticket:', err)
-      });
-
-    // Close logic: only if approved
-    } else if (newStatus === 'CLOSED') {
-      if (ticket.status !== 'APPROVED') {
-        console.error('Ticket must be APPROVED before it can be CLOSED.');
-        return;
-      }
-      this.applicationService.closeTicket(ticket.id).subscribe({
-        next: () => {
-          ticket.status = 'CLOSED';
-          console.log(`Ticket ${ticket.id} closed.`);
-          this.getKPIs();
-        },
-        error: (err) => console.error('Error closing ticket:', err)
-      });
-    }
-    // Cancel logic: only for NEW, ASSIGNED, IN_PROGRESS
-  //   } else if (newStatus === 'CANCELLED') {
-  //     if (!["NEW", "ASSIGNED", "IN_PROGRESS"].includes(ticket.status)) {
-  //       console.error('Can only cancel tickets that are NEW, ASSIGNED, or IN_PROGRESS.');
-  //       return;
-  //     }
-  //     this.applicationService.cancelTicket(ticket.id).subscribe({
-  //       next: () => {
-  //         ticket.status = 'CANCELLED';
-  //         console.log(`Ticket ${ticket.id} cancelled.`);
-  //         this.getKPIs();
-  //       },
-  //       error: (err) => console.error('Error cancelling ticket:', err)
-  //     });
-
-  //   } else {
-  //     console.warn('User cannot manually change ticket to:', newStatus);
-  //     // Do nothing; backend handles other status transitions automatically.
-  //   }
+      // else: do nothing
+    });
   }
+
+  changeTicketStatus(ticket: any, newStatus: string) {
+  if (ticket.status === newStatus) {
+    console.warn('Ticket already has status:', newStatus);
+    return;
+  }
+
+  if (newStatus === 'APPROVED') {
+    if (ticket.status !== 'SOLVED') {
+      console.error('Ticket must be SOLVED before it can be APPROVED.');
+      return;
+    }
+    this.applicationService.approveTicket(ticket.id).subscribe({
+      next: () => {
+        ticket.status = 'APPROVED';
+        console.log(`Ticket ${ticket.id} approved.`);
+        this.getKPIs();
+      },
+      error: (err) => console.error('Error approving ticket:', err)
+    });
+
+  } else if (newStatus === 'CLOSED') {
+    if (ticket.status !== 'APPROVED') {
+      console.error('Ticket must be APPROVED before it can be CLOSED.');
+      return;
+    }
+    this.applicationService.closeTicket(ticket.id).subscribe({
+      next: () => {
+        ticket.status = 'CLOSED';
+        console.log(`Ticket ${ticket.id} closed.`);
+        this.getKPIs();
+      },
+      error: (err) => console.error('Error closing ticket:', err)
+    });
+
+  } else {
+    console.warn('User cannot manually change ticket to:', newStatus);
+    // Do nothing; backend handles other status transitions automatically.
+  }
+}
 
 
   filterByState(state: string) {

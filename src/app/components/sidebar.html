@@ -1,0 +1,27 @@
+<div class="app-sidebar" [class.collapsed]="sidebarCollapsed">
+  <nav>
+    <button class="menu-btn" (click)="toggleSidebar.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+    <a class="nav-link" (click)="navigateToApplication()">
+      <mat-icon>apps</mat-icon>
+      <span>Applications</span>
+    </a>
+    <a class="nav-link" (click)="navigateToFeature()">
+      <mat-icon>star</mat-icon>
+      <span>Features</span>
+    </a>
+    <a class="nav-link" (click)="navigateToTicket()">
+      <mat-icon>confirmation_number</mat-icon>
+      <span>My ticket</span>
+    </a>
+    <a class="nav-link" (click)="navigateToFeedback()">
+      <mat-icon>add_reaction</mat-icon>
+      <span>Feedback</span>
+    </a>
+    <a class="nav-link" (click)="navigateToAssigned()">
+      <mat-icon>assignment_ind</mat-icon>
+      <span>Assigned</span>
+    </a>
+  </nav>
+</div>

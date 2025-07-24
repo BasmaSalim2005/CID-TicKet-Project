@@ -1,13 +1,12 @@
-
-
-import { Component, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, MatMenuModule, MatButtonModule],
   standalone: true,
   templateUrl: './header.html',
   styleUrl: './header.css'
@@ -17,7 +16,6 @@ export class HeaderComponent {
   firstname: string = '';
   lastname: string = '';
   email?: string = ''
-  showProfileMenu: boolean = false;
   constructor(private router: Router) {}
   
   @Output() toggleSidebar = new EventEmitter<void>();
@@ -39,37 +37,9 @@ export class HeaderComponent {
   get initials(): string {
     return this.getInitials();
   }
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    // Only close if click is outside the initials or dropdown
-    if (!target.closest('.account-info')) {
-      this.showProfileMenu = false;
-    }
-  }
-  capitalizeText(text: string): string {
-  if (!text) return '';
-  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-}
- formatRole(text: string): string {
-  if( this.role ==='ADMIN'){
-    return 'Administrator'
-  }
-  if( this.role ==='DEVELOPER'){
-    return 'Développeur'
-  }
-  if( this.role ==='TECHNICIAN'){
-    return 'Technicien'
-  } else  {
-    return 'Utilisateur'
-  }
-}
-
-
   logout(){
     localStorage.clear();
     this.router.navigate([''])
-    this.showProfileMenu = false;
     // this.keycloak.logout();
   }
 }

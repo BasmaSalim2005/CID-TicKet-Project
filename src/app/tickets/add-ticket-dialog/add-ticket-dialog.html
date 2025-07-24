@@ -1,54 +1,53 @@
 <h2 mat-dialog-title>Add Ticket</h2>
 <form [formGroup]="ticketForm" (ngSubmit)="onSave()">
   <mat-form-field appearance="outline" style="width:100%">
-    <mat-label>Title <span style="color:#d32f2f">*</span></mat-label>
+    <mat-label>Title</mat-label>
     <input matInput formControlName="title" required />
   </mat-form-field>
   <mat-form-field appearance="outline" style="width:100%">
-    <mat-label>Description <span style="color:#d32f2f">*</span></mat-label>
+    <mat-label>Description</mat-label>
     <textarea matInput formControlName="description" required></textarea>
   </mat-form-field>
   <mat-form-field appearance="outline" style="width:100%">
-    <mat-label>Priority <span style="color:#d32f2f">*</span></mat-label>
+    <mat-label>Priority</mat-label>
     <mat-select formControlName="priority" required>
       <mat-option value="LOW">Low</mat-option>
       <mat-option value="MEDIUM">Medium</mat-option>
       <mat-option value="HIGH">High</mat-option>
     </mat-select>
   </mat-form-field>
-
-<!-- Category -->
+  <!-- Category -->
 <mat-form-field appearance="outline" style="width:100%">
-  <mat-label>Category <span style="color:#d32f2f">*</span></mat-label>
-  <mat-select formControlName="categories" required>
+  <mat-label>Category</mat-label>
+  <mat-select formControlName="category" required>
     <mat-option value="HELPDESK">Help-Desk</mat-option>
     <mat-option value="APP_RELATED">App-Related</mat-option>
   </mat-select>
 </mat-form-field>
 
-<!-- Location (for Help-Desk) -->
+<!-- Location -->
 <mat-form-field appearance="outline" style="width:100%" *ngIf="showLocation">
-  <mat-label>Location <span style="color:#d32f2f">*</span></mat-label>
-  <input matInput formControlName="location" required />
+  <mat-label>Location</mat-label>
+  <textarea matInput formControlName="location" required></textarea>
 </mat-form-field>
 
-<!-- Applications (for App-Related) -->
+<!-- Applications -->
 <mat-form-field appearance="outline" style="width:100%" *ngIf="showApplications">
-  <mat-label>Application <span style="color:#d32f2f">*</span></mat-label>
+  <mat-label>Applications</mat-label>
   <mat-select formControlName="app" required>
     <mat-option *ngFor="let app of applications" [value]="app.name">{{ app.name }}</mat-option>
   </mat-select>
 </mat-form-field>
 
-<!-- Features (for selected App) -->
+<!-- Features -->
 <mat-form-field appearance="outline" style="width:100%" *ngIf="showFeatures">
-  <mat-label>Feature <span style="color:#d32f2f">*</span></mat-label>
-  <mat-select formControlName="feature" required>
+  <mat-label>Features</mat-label>
+  <mat-select formControlName="feat" required>
     <mat-option *ngFor="let feat of features" [value]="feat.name">{{ feat.name }}</mat-option>
   </mat-select>
 </mat-form-field>
 
-  <div style="display:flex; align-items: center; justify-content:flex-end; gap:8px; margin-top:16px;">
+  <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:16px;">
     <button mat-button type="button" (click)="onCancel()">Cancel</button>
     <button mat-raised-button color="primary" type="submit" [disabled]="ticketForm.invalid">Save</button>
   </div>

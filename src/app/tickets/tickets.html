@@ -9,13 +9,12 @@
 
 <app-header (toggleSidebar)="toggleSidebar()"></app-header>
 
-
+<button  class="addfeat" (click)="openAddTicketDialog()">Add Ticket</button>
 
 
 <div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
   <h2 style="position: absolute ;top: 9%; right: 0%; width: 81% !important;">Indicateur de performance</h2>
-  <button  class="addfeat" (click)="openAddTicketDialog()" style="position: absolute ;top: 9%; right: 1%; width: 130px !important;">Add Ticket</button>
-  <div class="kpi-cards" style=" position: absolute ; height: auto ;top: 10.5%; right: 0%; width: 81% !important;display: flex; justify-content: center; align-items: center;">
+  <div class="kpi-cards" style="position: absolute ; height:300px;top: 12%; right: 0%; width: 81% !important;display: flex; justify-content: center; align-items: center;">
     <mat-card class="kpi-card total" (click)="filterByState('ALL')">
       <mat-card-header>
         <mat-card-title>TOTAL</mat-card-title>
@@ -73,8 +72,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <h2 style="position: absolute ;top: 250px; right: 0%; width: 81% !important;">List des tickets</h2>
-   <table *ngIf="tickets && tickets.length > 0" style="position: absolute; top: 320px;right: 0%; width: 81% !important;" 
+  <h2 style="position: absolute ;top: 400px; right: 0%; width: 81% !important;">List des tickets</h2>
+   <table *ngIf="tickets && tickets.length > 0" style="position: absolute; top: 440px;right: 0%; width: 81% !important;" 
       class="tickets-table">
     <thead>
       <tr>
@@ -97,9 +96,10 @@
         <td>{{ ticket.creationDate | date:'medium' }}</td>
         <td>{{ ticket.assignedTo }}</td>
         <!-- <td>{{ ticket.status }}</td> -->
-        <td [ngClass]="'status-' + ticket.status?.toLowerCase()">{{ ticket.status }}</td>
+        <td [ngClass]="'status-' + ticket.status.toLowerCase()">{{ ticket.status }}</td>
         <td>{{ ticket.priority }}</td>
-        <td>{{ ticket.categories }}</td>
+        <td>{{ ticket.category }}</td>
+        <td>{{ ticket.type }}</td>
         <!-- <td>
           <button mat-icon-button color="warn" (click)="deleteticket(ticket.id)">
             <mat-icon>delete</mat-icon>

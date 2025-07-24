@@ -50,11 +50,13 @@ export class TicketDetailsAdmin implements OnInit {
       });
       this.applicationService.getStatusDetails(+id).subscribe({
         next: (data: TicketStatusDetailsDTO) => {
+          console.log(data);
           this.ticketDetails = data;
         }
       });
     }
   }
+  
  toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }

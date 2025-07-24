@@ -53,8 +53,6 @@
 } */
 
 .addfeat {
-  margin-top: 20px;
-  display: block;
   background: linear-gradient(90deg, #486cee 0%, #60a3f5 100%);
   color: #fff;
   font-weight: 600;
@@ -136,12 +134,11 @@
   align-items: stretch;
 }
 
-
 .kpi-card {
-  min-width: 120px;
-  max-width: 185px;
-  flex: 1 1 120px;
-  border-radius: 12px;
+  min-width: 180px;
+  max-width: 240px;
+  flex: 1 1 180px;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(96,163,245,0.10);
   transition: box-shadow 0.2s, transform 0.1s;
   cursor: pointer;
@@ -150,7 +147,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 10px 14px 10px 14px;
+  padding: 18px 24px 18px 24px;
 }
 
 .kpi-card:hover {
@@ -163,43 +160,36 @@
 }
 
 .kpi-card .mat-card-title {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 900;
   color: #fff;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .kpi-card .mat-card-content {
   padding-top: 0;
 }
 
-.kpi-card {
-  min-width: 120px;
-  max-width: 185px;
-  flex: 1 1 120px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(96,163,245,0.10);
-  transition: box-shadow 0.2s, transform 0.1s;
-  cursor: pointer;
-  margin-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 10px 14px 10px 14px;
+.kpi-card p {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  text-align: left;
+  padding-left: 2px;
 }
 
-.kpi-card.total { background: #26c6da; color: #fff;}
-.kpi-card.assigned { background: #8e24aa; color: #fff;}
-.kpi-card.inprogress { background: #ff9800; color: #fff;}
-.kpi-card.solved { background: #43a047; color: #fff;}
-.kpi-card.approved { background: #4e73f8; color: #fff;}
-.kpi-card.closed { background: #757575; color: #fff;}
-.kpi-card.cancelled { background: #d32f2f; color: #fff;}
+.kpi-card.total { background: #4e73f8; }
+.kpi-card.assigned { background: #8e24aa; }
+.kpi-card.inprogress { background: #1976d2; }
+.kpi-card.solved { background: #43a047; }
+.kpi-card.approved { background: #ffd600; color: #222; }
+.kpi-card.closed { background: #757575; }
+.kpi-card.cancelled { background: #d32f2f; }
 
-/* .kpi-card.approved .mat-card-title, .kpi-card.approved p { color: #222; } */
+.kpi-card.approved .mat-card-title, .kpi-card.approved p { color: #222; }
 
 h2 {
   color: #3f5bc4;
@@ -208,12 +198,12 @@ h2 {
 }
 
 /* Table cell backgrounds for status (soft, readable) */
-.tickets-table td.status-approved { background: #e3eafd; color: #4e73f8; }
+.tickets-table td.status-approved { background: #fffde7; color: #795548; }
 .tickets-table td.status-assigned { background: #f3e5f5; color: #6a1b9a; }
 .tickets-table td.status-closed { background: #eeeeee; color: #424242; }
 .tickets-table td.status-cancelled { background: #ffebee; color: #c62828; }
 .tickets-table td.status-solved { background: #e8f5e9; color: #388e3c; }
-.tickets-table td.status-inprogress { background: #fff3e0; color: #ff9800; }
+.tickets-table td.status-inprogress { background: #e3f2fd; color: #1976d2; }
 
 /* Table cell backgrounds for priority (soft, readable) */
 .tickets-table td.priority-veryhigh { background: #ffebee; color: #c62828; }
@@ -222,7 +212,7 @@ h2 {
 .tickets-table td.priority-low { background: #e8f5e9; color: #388e3c; }
 
 /* KPI Card solid colors for tickets (like applications page) */
-/* .kpi-card.total {
+.kpi-card.total {
   background: #4e73f8;
   color: #fff;
 }
@@ -250,5 +240,3 @@ h2 {
   background: #d32f2f;
   color: #fff;
 }
-
- */

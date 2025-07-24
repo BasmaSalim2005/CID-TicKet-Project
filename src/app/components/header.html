@@ -2,23 +2,26 @@
   <!-- <button class="menu-btn" (click)="toggleSidebar.emit()">
     <mat-icon>menu</mat-icon>
   </button> -->
-  <div style="display: flex; align-items: center;">
-  <img src="assets/cid.png" alt="CID Ticket Logo" class="logo" style="margin-right: 450px;"/>
-  <h2 style="font-family: 'Times New Roman', Times, serif; color: rgb(189, 96, 4); margin-right: 410px;">Application pour gestion de d'incident a travers des Tickets</h2>
+  <img src="assets/cid.png" alt="CID Ticket Logo" class="logo" />
   <div class="account-info">
-    <div class="initials" (click)="showProfileMenu = !showProfileMenu">
+    <div class="initials" [matMenuTriggerFor]="profileMenu">
       {{ initials }}
     </div>
-    <div class="mydropdown profile-menu-panel" *ngIf="showProfileMenu" (clickOutside)="showProfileMenu = false">
-      <div class="profile-names">
-        <span class="fname">{{firstname}}</span>
-        <span class="lname">{{lastname}}</span>
-      </div>
-      <div class="email">{{email}}</div>
-      <div class="role">{{formatRole(role)}}</div>
-      <button class="logout-btn" (click)="logout(); showProfileMenu = false">Logout</button>
-    </div>
   </div>
-</div>
+  <mat-menu #profileMenu="matMenu" panelClass="profile-menu-panel" class="mydropdown">
+    <div class="profile-names">
+      <span class="fname">{{firstname}}</span>
+      <span class="lname">{{lastname}}</span>
+    </div>
+    <div class="email">{{email}}</div>
+    <div class="role">{{role}}</div>
+    <button mat-menu-item class="logout-btn" (click)="logout()">Logout</button>
+  </mat-menu>
 
 </header>
+<style>
+.mydropdown{
+  background-color: #60a3f5!important;
+  height: 500px;
+}
+</style>

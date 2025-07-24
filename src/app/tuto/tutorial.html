@@ -1,0 +1,17 @@
+<app-sidebar
+  [sidebarCollapsed]="sidebarCollapsed"
+  (toggleSidebar)="toggleSidebar()"
+></app-sidebar>
+<app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+  <div class="tutorial-container">
+    <h2>Tutoriel d'utilisation de l'application</h2>
+    <p>
+      Bienvenue ! Cette section vous guide à travers les principales fonctionnalités de l'application CID Ticket.
+    </p>
+    <p>
+      Pour plus de détails, consultez le guide complet ci-dessous :
+    </p>
+    <a id="follow-link" href="https://docs.google.com/document/d/13CbMRvzfSSttBL-_ZEfJSDiU_95_CxvteAFLwv1kFe8/edit?usp=drive_link" target="_blank" style="color:#1976d2; text-decoration:underline; font-size:16px;">Lien du tutoriel (à venir)</a>
+  </div>
+</div>

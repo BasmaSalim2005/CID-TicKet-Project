@@ -1,18 +1,11 @@
 <div class="login-container" >
   <img src="assets/cid.png" alt="CID Logo" class="logo" />
-  <div class="login-title">Bienvenue sur l'application CID Ticket</div>
+  <div class="login-title">Welcome to CID Ticket App</div>
   <form [formGroup]="appform" class="login-form">
-    <div class="form-row">
-      <label for="email">Email <span class="required-star">*</span>:</label>
-      <input type="email" formControlName="email" id="email" placeholder="User Email"/>
-    </div>
-    <div class="form-row">
-      <label for="password">Mot de passe <span class="required-star">*</span>:</label>
-      <input type="password" formControlName="password" id="password" placeholder="Password">
-    </div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 8px;">
-      <a href="#" class="forgot-link">Mot de passe oublié ?</a>
-    </div>
-    <button mat-raised-button color="primary" (click)="authentificate()">Connexion</button>
+    <label for="email">Email:</label>
+    <input type="email" formControlName="email" id="email" placeholder="User Email"/>
+    <label for="password">Password:</label>
+    <input type="password" formControlName="password" id="password" placeholder="Password">
+    <button mat-raised-button color="primary" (click)="authentificate()">Login</button>
   </form>
 </div>

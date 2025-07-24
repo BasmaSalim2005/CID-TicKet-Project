@@ -1,4 +1,3 @@
-
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
@@ -41,43 +40,11 @@ export class SidebarComponent implements OnInit{
     return requiredRoles.includes(this.role);
   }
 
-  navigateToAllTickets() {
-    if (this.hasRole(['ADMIN'])) {
-      this.router.navigate(['/tickets/admintic']);
-    } else {
-      this.router.navigate(['/not-authorized']);
-    }
-  }
-
-  navigateToMyTickets() {
-    if (this.hasRole(['ADMIN', 'DEVELOPER', 'TECHNICIAN', 'USER'])) {
-      this.router.navigate(['/tickets']);
-    } else {
-      this.router.navigate(['/not-authorized']);
-    }
-  }
-
-  navigateToAllFeedback() {
-    if (this.hasRole(['ADMIN'])) {
-      this.router.navigate(['/feedback/allfeedback']);
-    } else {
-      this.router.navigate(['/not-authorized']);
-    }
-  }
-
-  navigateToFeedbackPage() {
-    if (this.hasRole(['ADMIN', 'DEVELOPER', 'TECHNICIAN', 'USER'])) {
-      this.router.navigate(['/feedback/appfeedback']);
-    } else {
-      this.router.navigate(['/not-authorized']);
-    }
-  }
-
   navigateToAllApplications() {
     // Assuming this should navigate to the admin applications view
     if (this.hasRole(['ADMIN'])) {
       this.router.navigate(['/applications/appsadmin']);
-    } else if (this.hasRole(['DEVELOPER'])) {
+    } else {
       // Redirect to not authorized or default page
       this.router.navigate(['/not-authorized']);
     }
@@ -86,7 +53,7 @@ export class SidebarComponent implements OnInit{
   navigateToApplication() {
     if (this.hasRole(['ADMIN'])) {
       this.router.navigate(['/applications/appsadmin']);
-    } else if (this.hasRole([ 'DEVELOPER'])) {
+    } else if (this.hasRole(['USER', 'DEV', 'TECH'])) {
       this.router.navigate(['/applications/apps']);
     } else {
       this.router.navigate(['/not-authorized']);
@@ -94,27 +61,39 @@ export class SidebarComponent implements OnInit{
   }
 
   navigateToFeature() {
-     if (this.hasRole(['ADMIN', 'DEVELOPER'])) {
+    if (this.hasRole(['ADMIN'])) {
+      this.router.navigate(['/features/admin']);
+    } else if (this.hasRole(['USER', 'DEV', 'TECH'])) {
       this.router.navigate(['/features']);
     } else {
       this.router.navigate(['/not-authorized']);
     }
   }
 
-  // navigateToTicket() {
-  //   if (this.hasRole(['ADMIN'])) {
-  //     this.router.navigate(['/tickets/admintic']);
-  //   } else if (this.hasRole(['USER', 'DEVELOPER', 'TECHNICIAN', 'ADMIN'])) {
-  //     this.router.navigate(['/tickets']);
-  //   } else {
-  //     this.router.navigate(['/not-authorized']);
-  //   }
-  // }
+  navigateToTicket() {
+    if (this.hasRole(['ADMIN'])) {
+      this.router.navigate(['/tickets/admintic']);
+    } else if (this.hasRole(['DEV', 'TECH'])) {
+      this.router.navigate(['/tickets/assignedticketscomponent']);
+    } else if (this.hasRole(['USER'])) {
+      this.router.navigate(['/tickets']);
+    } else {
+      this.router.navigate(['/not-authorized']);
+    }
+  }
 
-  
+  navigateToFeedback() {
+    if (this.hasRole(['ADMIN'])) {
+      this.router.navigate(['/feedback/allfeedback']);
+    } else if (this.hasRole(['USER', 'DEV', 'TECH'])) {
+      this.router.navigate(['/feedback/appfeedback']);
+    } else {
+      this.router.navigate(['/not-authorized']);
+    }
+  }
 
   navigateToAssigned() {
-    if (this.hasRole(['DEVELOPER', 'TECHNICIAN'])) {
+    if (this.hasRole(['DEV', 'TECH'])) {
       this.router.navigate(['/tickets/assignedticketscomponent']);
     } else {
       this.router.navigate(['/not-authorized']);
@@ -123,7 +102,7 @@ export class SidebarComponent implements OnInit{
 
   navigateToHistory() {
     // All authenticated users can view history
-    if (this.hasRole(['USER', 'DEVELOPER', 'TECHNICIAN', 'ADMIN'])) {
+    if (this.hasRole(['USER', 'DEV', 'TECH', 'ADMIN'])) {
       this.router.navigate(['/tickets/history']);
     } else {
       this.router.navigate(['/not-authorized']);

@@ -3,28 +3,16 @@
     <button class="menu-btn" (click)="toggleSidebar.emit()">
       <mat-icon>menu</mat-icon>
     </button>
-    <!-- ADMIN -->
+    <!-- Admin Links -->
     <ng-container *ngIf="role === 'ADMIN'">
-      <a class="nav-link" (click)="navigateToAllTickets()">
+      <a class="nav-link" (click)="navigateToTicket()">
         <mat-icon>list_alt</mat-icon>
         <span>All Tickets</span>
       </a>
-      <a class="nav-link" (click)="navigateToMyTickets()">
-        <mat-icon>confirmation_number</mat-icon>
-        <span>My Tickets</span>
-      </a>
-      <a class="nav-link" (click)="navigateToHistory()">
-        <mat-icon>history</mat-icon>
-        <span>History</span>
-      </a>
-      <a class="nav-link" (click)="navigateToAllFeedback()">
+      <a class="nav-link" (click)="navigateToFeedback()">
         <mat-icon>feedback</mat-icon>
         <span>All Feedback</span>
       </a>
-      <a class="nav-link" (click)="navigateToFeedbackPage()">
-        <mat-icon>add_reaction</mat-icon>
-        <span>Feedback</span>
-      </a>
       <a class="nav-link" (click)="navigateToApplication()">
         <mat-icon>apps</mat-icon>
         <span>Applications</span>
@@ -33,11 +21,14 @@
         <mat-icon>star</mat-icon>
         <span>Features</span>
       </a>
-      
+      <a class="nav-link" (click)="navigateToHistory()">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </a>
     </ng-container>
 
-    <!-- DEVELOPER -->
-    <ng-container *ngIf="role === 'DEVELOPER'">
+    <!-- Dev and Tech Links -->
+    <ng-container *ngIf="role === 'DEV' || role === 'TECH'">
       <a class="nav-link" (click)="navigateToApplication()">
         <mat-icon>apps</mat-icon>
         <span>Applications</span>
@@ -50,55 +41,38 @@
         <mat-icon>assignment_ind</mat-icon>
         <span>Assigned</span>
       </a>
-      <a class="nav-link" (click)="navigateToMyTickets()">
-        <mat-icon>confirmation_number</mat-icon>
-        <span>My Tickets</span>
+      <a class="nav-link" (click)="navigateToFeedback()">
+        <mat-icon>add_reaction</mat-icon>
+        <span>Feedback</span>
       </a>
       <a class="nav-link" (click)="navigateToHistory()">
         <mat-icon>history</mat-icon>
         <span>History</span>
       </a>
-      <a class="nav-link" (click)="navigateToFeedbackPage()">
-        <mat-icon>add_reaction</mat-icon>
-        <span>Feedback</span>
-      </a>
     </ng-container>
 
-    <!-- TECHNICIAN -->
-    <ng-container *ngIf="role === 'TECHNICIAN'">
-      <a class="nav-link" (click)="navigateToAssigned()">
-        <mat-icon>assignment_ind</mat-icon>
-        <span>Assigned</span>
-      </a>
-      <a class="nav-link" (click)="navigateToMyTickets()">
-        <mat-icon>confirmation_number</mat-icon>
-        <span>My Tickets</span>
-      </a>
-      <a class="nav-link" (click)="navigateToHistory()">
-        <mat-icon>history</mat-icon>
-        <span>History</span>
-      </a>
-      <a class="nav-link" (click)="navigateToFeedbackPage()">
-        <mat-icon>add_reaction</mat-icon>
-        <span>Feedback</span>
-      </a>
-    </ng-container>
-
-    <!-- USER -->
+    <!-- User Links -->
     <ng-container *ngIf="role === 'USER'">
-      <a class="nav-link" (click)="navigateToMyTickets()">
+      <a class="nav-link" (click)="navigateToApplication()">
+        <mat-icon>apps</mat-icon>
+        <span>Applications</span>
+      </a>
+      <a class="nav-link" (click)="navigateToFeature()">
+        <mat-icon>star</mat-icon>
+        <span>Features</span>
+      </a>
+      <a class="nav-link" (click)="navigateToTicket()">
         <mat-icon>confirmation_number</mat-icon>
         <span>My Tickets</span>
+      </a>
+      <a class="nav-link" (click)="navigateToFeedback()">
+        <mat-icon>add_reaction</mat-icon>
+        <span>Feedback</span>
       </a>
       <a class="nav-link" (click)="navigateToHistory()">
         <mat-icon>history</mat-icon>
         <span>History</span>
       </a>
-      <a class="nav-link" (click)="navigateToFeedbackPage()">
-        <mat-icon>add_reaction</mat-icon>
-        <span>Feedback</span>
-      </a>
-      <p style="top: 85%;">Copyright&#64;CID </p>
     </ng-container>
   </nav>
 </div>
