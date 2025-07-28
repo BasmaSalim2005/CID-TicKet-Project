@@ -68,10 +68,12 @@ export class Tickets {
     this.applicationService.getTicketsByUser(this.user.email).subscribe({
       next: (data: any[]) => {
         this.tickets = data;
+        this.totalTickets = this.tickets.length;
         this.getKPIs();
       },
       error: () => {
         this.tickets = [];
+        this.totalTickets = 0;
         this.getKPIs();
       }
     });
@@ -246,8 +248,8 @@ export class Tickets {
 
   filterByState(state: string) {
     this.selectedStateFilter = state;
-    // this.currentPage = 0;
     this.getTicketsByUser();
+    // totalTickets will be updated in getTicketsByUser
   }
   
   // input first and last name and capitalise the first name and  upper case lastname then return the concatenation of it example : SALIM Basma

@@ -16,11 +16,17 @@ export class ApplicationService {
 
   // -------------------- APPLICATION SERVICE --------------------
   getAllApplicationspage(page: number, size: number): Observable<any> {
-    return this.http.get<any>(`${envirement.applicationService}/apps?page=${page}&size=${size}`);
-  }
-  getAppbyuserpage(email: string, page: number, size: number): Observable<any> {
-    return this.http.get<any>(`${envirement.applicationService}/app/by-user?${email}page=${page}&size=${size}`);
-  }
+  const params = new HttpParams().set('page', page).set('size', size);
+  return this.http.get<any>(`${envirement.applicationService}/apps`, { params });
+}
+
+getAppbyuserpage(email: string, page: number, size: number): Observable<any> {
+  const params = new HttpParams()
+    .set('email', email)
+    .set('page', page)
+    .set('size', size);
+  return this.http.get<any>(`${envirement.applicationService}/app/by-user`, { params });
+}
   getAllApplications(): Observable<any> {
     return this.http.get<any>(`${envirement.applicationService}/all`);
   }
@@ -64,9 +70,8 @@ export class ApplicationService {
     return this.http.delete(`${envirement.applicationService}/delete/${id}`);
   }
   AuthentificateUser(email: string, password: string): Observable<any> {
-    const body = new HttpParams().set('email', email).set('password', password);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return this.http.post<any>(`${envirement.UserService}/login`, body.toString(), { headers });
+    const body = { email, password };
+    return this.http.post<any>(`${envirement.UserService}/authenticate`, body);
   }
   setApplicationActive(appName: String): Observable<any> {
     return this.http.put<any>(`${envirement.applicationService}/activate/${appName}`, null);

@@ -16,6 +16,7 @@ import { History } from './tickets/history/history';
 import { Summary } from './feedback/summary/summary';
 import { Ratingdialogue } from './feedback/ratingdialogue/ratingdialogue';
 import { AssignedCount } from './tickets/assigned-count/assigned-count';
+import { JwtInterceptor } from './services/JwtInterceptor';
 
 
 
@@ -46,7 +47,8 @@ import { AssignedCount } from './tickets/assigned-count/assigned-count';
     MatDialogModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   // providers: [
   //   //added keycloak here
